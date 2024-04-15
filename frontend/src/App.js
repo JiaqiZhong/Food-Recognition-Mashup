@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Landing from './Pages/Landing';
+import Preview from './Pages/Preview';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />}/>
+          <Route path="/Preview" element={<Preview />}/>
         </Routes>
       </BrowserRouter>
     </div>
