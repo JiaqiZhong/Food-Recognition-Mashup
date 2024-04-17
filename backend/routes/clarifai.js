@@ -3,9 +3,10 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const dotenv = require('dotenv');
-const {ClarifaiStub, grpc} = require("clarifai-nodejs-grpc");
 
 dotenv.config();
+
+const {ClarifaiStub, grpc} = require("clarifai-nodejs-grpc");
 
 const stub = ClarifaiStub.grpc();
 
@@ -27,6 +28,7 @@ const upload = multer({
     }
 });
 
+// Unused
 router.post('/', async function (req, res) {
     try {
         const { imageUrl } = req.body;
@@ -51,16 +53,16 @@ router.post('/', async function (req, res) {
 });
 
 router.post('/upload', upload.single('food_image'), async function (req, res) {
-    const inputs = [
-        {
-            data: {
-                image: {
-                    base64: req.file.buffer
+    try {
+        const inputs = [
+            {
+                data: {
+                    image: {
+                        base64: req.file.buffer
+                    }
                 }
             }
-        }
-    ]
-    try {
+        ]
         const results = await recognizeFood(inputs);
         return res.send({
             results
@@ -69,6 +71,7 @@ router.post('/upload', upload.single('food_image'), async function (req, res) {
         res.status(400).send({
             error: err
         })
+        console.log(err);
     }
 })
 

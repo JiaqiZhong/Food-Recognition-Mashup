@@ -1,0 +1,84 @@
+{
+    "results": [
+        {
+            "name": "curry",
+            "value": 0.9964308738708496
+        },
+        {
+            "name": "rice",
+            "value": 0.9932212829589844
+        },
+        {
+            "name": "chicken",
+            "value": 0.9909788370132446
+        },
+        {
+            "name": "meat",
+            "value": 0.9686295986175537
+        },
+        {
+            "name": "chicken curry",
+            "value": 0.9596641659736633
+        },
+        {
+            "name": "vegetable",
+            "value": 0.9506856203079224
+        },
+        {
+            "name": "pork",
+            "value": 0.8771251440048218
+        },
+        {
+            "name": "sauce",
+            "value": 0.8374958038330078
+        },
+        {
+            "name": "chili",
+            "value": 0.724587082862854
+        },
+        {
+            "name": "gravy",
+            "value": 0.6594255566596985
+        },
+        {
+            "name": "potato",
+            "value": 0.5369154214859009
+        },
+        {
+            "name": "butter",
+            "value": 0.5262748003005981
+        },
+        {
+            "name": "sweet",
+            "value": 0.5124276876449585
+        },
+        {
+            "name": "fish",
+            "value": 0.5103470087051392
+        },
+        {
+            "name": "peanut",
+            "value": 0.5042706727981567
+        },
+        {
+            "name": "beef",
+            "value": 0.37085774540901184
+        },
+        {
+            "name": "coconut",
+            "value": 0.3295127749443054
+        },
+        {
+            "name": "pumpkin",
+            "value": 0.302670419216156
+        },
+        {
+            "name": "bread",
+            "value": 0.2820129990577698
+        },
+        {
+            "name": "pepper",
+            "value": 0.24535420536994934
+        }
+    ]
+}
