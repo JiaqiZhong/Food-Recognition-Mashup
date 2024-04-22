@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 // Routers
 const clarifaiRouter = require('./routes/clarifai')
+const nutritionFactsRouter = require('./routes/nutritionFacts')
 
 const app = express();
 
@@ -32,7 +33,9 @@ app.get('/', (req, res) => {
   res.json({ Page: "Backend for FoodLens" })
 });
 
+// Routers
 app.use('/recognition', clarifaiRouter);
+app.use('/nutrition-facts', nutritionFactsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
