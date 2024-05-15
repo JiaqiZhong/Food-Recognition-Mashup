@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Preview.css';
 
@@ -7,6 +7,7 @@ function Preview() {
     const location = useLocation();
     //const searchParams = new URLSearchParams(location.search);
     //const image = searchParams.get('image');
+    const navigate = useNavigate();
     const imageFile = location.state.image;
     const [loading, setLoading] = useState(false);
     const [nutritionFacts, setNutritionFacts] = useState([]);
@@ -16,7 +17,21 @@ function Preview() {
         const formData = new FormData();
         formData.append("food_image", imageFile);
         //getPredictions("http://localhost:4000/recognition/upload", formData);
-        getNutritionFacts("apple");
+        //getNutritionFacts("apple");
+        navigate(`/Recognition`, { state: { image: imageFile } });
+    }
+
+    function getNutritionFacts(ingredient) {
+        axios.get(`http://localhost:4000/nutrition-facts/${ingredient}`)
+        .then((res) => {
+            console.log(res.data);
+            setNutritionFacts(res.data);
+            setLoading(false);
+        })
+        .catch(err => {
+            console.log(err);
+            setLoading(false);
+        })
     }
 
     function getPredictions(url, option) {
@@ -29,23 +44,6 @@ function Preview() {
         });
     }
 
-    async function getNutritionFacts(ingredient) {
-        setLoading(true);
-        try {
-            axios.get(`http://localhost:4000/nutrition-facts/${ingredient}`)
-            .then((res) => {
-                console.log(res.data);
-                setNutritionFacts(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        } catch(err) {
-            console.log(err);
-        }
-        setLoading(false);
-    }
-
     return (
         <div className="preview">
             {loading ? (
@@ -56,14 +54,14 @@ function Preview() {
                     <div>
                         <Link to="/"><button>Cancel</button></Link>
                         <button onClick={handleConfirm}>Confirm</button>
-                        {nutritionFacts && (
+                        {/* {nutritionFacts && (
                             <ul>
                                 <li>Energy: {nutritionFacts.energy.quantity}</li>
                                 <li>Protein: {nutritionFacts.protein.quantity}</li>
                                 <li>Fat: {nutritionFacts.fat.quantity}</li>
-                                <li>Carbohydrates: {nutritionFacts.carbohydrates.quantity}</li>
+                                <li>Carbohydrates: {nutritionFacts.c.quantity}</li>
                             </ul>
-                        )}
+                        )} */}
                     </div>
                 </div>
             )}
