@@ -9,7 +9,7 @@ router.get('/:ingr', async (req, res) => {
     const options = createNutritionOptions(req.params.ingr)
     const url = `https://${options.hostname}${options.path}${options.parameters}`;
 
-    await axios.get(url)
+    axios.get(url)
     .then((response) => {
         const nutritionFacts = response.data.totalNutrientsKCal;
         const result = {
