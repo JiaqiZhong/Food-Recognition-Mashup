@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 // Routers
 const clarifaiRouter = require('./routes/clarifai')
 const nutritionFactsRouter = require('./routes/nutritionFacts')
+const recipesRouter = require('./routes/recipes');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 // Routers
 app.use('/recognition', clarifaiRouter);
 app.use('/nutrition-facts', nutritionFactsRouter);
+app.use('/recipes', recipesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
