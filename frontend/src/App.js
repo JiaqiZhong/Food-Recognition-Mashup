@@ -6,6 +6,7 @@ import './App.css';
 import Landing from './Pages/Landing';
 import Preview from './Pages/Preview';
 import Recognition from './Pages/Recognition';
+import Recipes from './Pages/Recipes';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Landing />}/>
           <Route path="/Preview" element={<Preview />}/>
           <Route path="/Recognition" element={<Recognition />}/>
+          <Route path="/Recipes" element={<Recipes />}/>
         </Routes>
       </BrowserRouter>
     </div>

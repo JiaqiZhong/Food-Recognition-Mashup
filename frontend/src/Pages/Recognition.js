@@ -3,7 +3,7 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import './Recognition.css';
 import axios from 'axios';
 import NutritionFacts from '../Component/NutritionFacts';
-import Recipes from '../Component/Recipes';
+//import Recipes from './Recipes';
 import data from '../JSON/predictionsWithNutritionFacts';
 
 function Recognition() {
@@ -31,19 +31,6 @@ function Recognition() {
       //getPredictions("http://localhost:4000/recognition/upload", formData);
     }
   }, []);
-
-  // function getNutritionFacts(ingredient) {
-  //   axios.get(`http://localhost:4000/nutrition-facts/${ingredient}`)
-  //   .then((res) => {
-  //       console.log(res.data);
-  //       setNutritionFacts(res.data);
-  //       setLoading(false);
-  //   })
-  //   .catch(err => {
-  //       console.log(err);
-  //       setLoading(false);
-  //   })
-  // }
 
   function getPredictions(url, option) {
     axios.post(url, option)
@@ -89,19 +76,6 @@ function Recognition() {
           </div>
           <p>Which one did I guess right? Select them to fiind your favourite recipes ^_^</p>
           <input type="text" placeholder="Add more here..."></input>
-          {/* {nutritionFacts && (
-            <table>
-              <tr>
-                <td><input id="checkbox" type="checkbox"/></td>
-                <td>Apple</td>
-                <td>{+(Math.round(0.9866 * 100 + "e+2") + "e-2")}</td>
-                <td>{nutritionFacts.energy.quantity}</td>
-                <td>{nutritionFacts.protein.quantity}</td>
-                <td>{nutritionFacts.fat.quantity}</td>
-                <td>{nutritionFacts.carbohydrates.quantity}</td>
-              </tr>
-            </table>
-          )} */}
           <table>
             <thead>
               <tr>

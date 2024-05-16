@@ -9,7 +9,7 @@ router.get('/:ingr', async (req, res) => {
     const options = createNutritionOptions(req.params.ingr)
     const url = `https://${options.hostname}${options.path}${options.parameters}`;
 
-    axios.get(url)
+    await axios.get(url)
     .then((response) => {
         const nutritionFacts = response.data.totalNutrientsKCal;
         const result = {
@@ -25,20 +25,14 @@ router.get('/:ingr', async (req, res) => {
     })
 });
 
-const edamamNutrition = {
-    nutrition_type: 'logging',
-    app_id: process.env.NUTRITION_APP_ID,
-    app_key: process.env.NUTRITION_KEY
-}
-
 function createNutritionOptions(ingr) {
     const options = {
         hostname: 'api.edamam.com',
         path: '/api/nutrition-data',
         parameters: 
-            '?app_id=' + edamamNutrition.app_id +
-            '&app_key=' + edamamNutrition.app_key +
-            '&nutrition-type=' + edamamNutrition.nutrition_type +
+            '?app_id=' + process.env.NUTRITION_APP_ID +
+            '&app_key=' + process.env.NUTRITION_KEY+
+            '&nutrition-type=logging' +
             '&ingr=' + ingr
     }
     return options;
