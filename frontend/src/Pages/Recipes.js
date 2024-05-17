@@ -18,16 +18,37 @@ function Recipes() {
         }
         else {
           console.log('component rendered');
-          getRecipes("http://localhost:4000/recipes/chicken");
+          // TODO: Replace the dummy ingredient (chicken) with user-selected ingredients
+          getRecipes("http://localhost:4000/recipes/find-recipes/chicken");
         }
       }, []);
 
     function getRecipes(url) {
         axios.get(url)
-        .then((response) => {
-            console.log(response.data);
-            setRecipes(response.data);
-            setLoading(false);
+        .then((res) => {
+            let recipes = res.data;
+            const promises = recipes.map(async (recipe) => {
+                try {
+                    const res = await axios.get(`http://localhost:4000/recipes/${recipe.id}`);
+                    recipe.prepTime = res.data.readyInMinutes;
+                    recipe.servings = res.data.servings;
+                    recipe.cuisineType = res.data.cuisines;
+                    recipe.diets = res.data.diets;
+                    recipe.calories = res.data.nutrition.nutrients[1].amount;
+                } catch (err) {
+                    console.log(err);
+                }                  
+            });
+            Promise.all(promises)
+            .then(() => {
+              console.log(recipes);
+              setRecipes(recipes);
+              setLoading(false);
+            })
+            .catch(err => {
+              console.log(err);
+              setLoading(false);
+          });
         })
         .catch((error) => {
             console.log(error);
@@ -49,6 +70,11 @@ function Recipes() {
                                         <Card.Img className="card-img-top w-100" src={recipe.image} alt="recipe" />
                                         <Card.Body className="card-body">
                                             <Card.Text className='card-title'>{recipe.title}</Card.Text>
+                                            <Card.Text>Calories: {recipe.calories} kcal</Card.Text>
+                                            <Card.Text>Servings: {recipe.servings}</Card.Text>
+                                            <Card.Text>Cooking Time: {recipe.prepTime}</Card.Text>
+                                            <Card.Text>Cuisine Type: {recipe.cuisineType}</Card.Text>
+                                            <Card.Text>Diets: {recipe.diets.join(', ')}</Card.Text>
                                         </Card.Body>
                                     </Card>
                                 {/* </Link> */}
