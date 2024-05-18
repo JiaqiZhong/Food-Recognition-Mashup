@@ -11,6 +11,9 @@ function Recipes() {
     const [recipes, setRecipes] = useState([]);
     const hasLoadedBefore = useRef(true)
 
+    const location = useLocation();
+    const ingredients = location.state.ingredients;
+
     useEffect(() => {
         if(hasLoadedBefore.current) {
           console.log("Effect ran")
@@ -18,8 +21,7 @@ function Recipes() {
         }
         else {
           console.log('component rendered');
-          // TODO: Replace the dummy ingredient (chicken) with user-selected ingredients
-          getRecipes("http://localhost:4000/recipes/find-recipes/chicken");
+          getRecipes(`http://localhost:4000/recipes/find-recipes/${ingredients.join()}`);
         }
       }, []);
 
@@ -70,7 +72,7 @@ function Recipes() {
                                         <Card.Img className="card-img-top w-100" src={recipe.image} alt="recipe" />
                                         <Card.Body className="card-body">
                                             <Card.Text className='card-title'>{recipe.title}</Card.Text>
-                                            <Card.Text>Calories: {recipe.calories} kcal</Card.Text>
+                                            <Card.Text>Calories (per serving): {recipe.calories} kcal</Card.Text>
                                             <Card.Text>Servings: {recipe.servings}</Card.Text>
                                             <Card.Text>Cooking Time: {recipe.prepTime}</Card.Text>
                                             <Card.Text>Cuisine Type: {recipe.cuisineType}</Card.Text>
