@@ -10,7 +10,9 @@ function Recognition() {
   const [isNutritionFacs, setIsNutritionFacts] = useState(true);
   const [loading, setLoading] = useState(false);
   const [predictedResults, setPredictedResults] = useState([]);
-  const hasLoadedBefore = useRef(true)
+  const [userSelectedIngredients, setUserSelectedIngredients] = useState({ingredients: []});
+  const hasLoadedBefore = useRef(true);
+  const navigate = useNavigate();
   
   const location = useLocation();
   const imageFile = location.state.image;
@@ -64,6 +66,36 @@ function Recognition() {
     });
   }
 
+  // Get user-selected ingredients from predicted results
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    const { ingredients } = userSelectedIngredients;
+
+    // console.log(`${value} is ${checked}`);
+    
+    // Case 1: The user checks the box
+    if (checked) {
+      setUserSelectedIngredients({
+          ingredients: [...ingredients, value]
+      });
+    }
+
+    // Case 2: The user unchecks the box
+    else {
+      setUserSelectedIngredients({
+          ingredients: ingredients.filter(
+              (ingr) => ingr !== value
+          ),
+      });
+    };
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log(userSelectedIngredients);
+    navigate(`/Recipes`, { state: { ingredients: userSelectedIngredients.ingredients } });
+  }
+
   return (
     <div className="main">
         {loading ? (
@@ -74,8 +106,9 @@ function Recognition() {
               {/* <NutritionFacts/>
               <Recipes/> */}
           </div>
-          <p>Which one did I guess right? Select them to fiind your favourite recipes ^_^</p>
-          <input type="text" placeholder="Add more here..."></input>
+          <p>Which one did I guess right? Select them to find your favourite recipes ^_^</p>
+          <textarea value={userSelectedIngredients.ingredients} placeholder="Add more here..." onChange={handleCheckboxChange}></textarea>
+          <button onClick={handleSearch}>Search</button>
           <table>
             <thead>
               <tr>
@@ -92,7 +125,7 @@ function Recognition() {
               <tbody>
                 {data.map(result => (
                   <tr key={result.name}>
-                    <td><input id="checkbox" type="checkbox"/></td>
+                    <td><input id="checkbox" value={result.name} type="checkbox" onChange={handleCheckboxChange}/></td>
                     <td>{result.name}</td>
                     <td>{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
                     <td>{result.energy}</td>
