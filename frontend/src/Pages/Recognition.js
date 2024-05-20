@@ -3,7 +3,6 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import './Recognition.css';
 import axios from 'axios';
 import NutritionFacts from '../Component/NutritionFacts';
-//import Recipes from './Recipes';
 import data from '../JSON/predictionsWithNutritionFacts';
 
 function Recognition() {
@@ -85,7 +84,7 @@ function Recognition() {
       setUserSelectedIngredients({
           ingredients: ingredients.filter(
               (ingr) => ingr !== value
-          ),
+          )
       });
     };
   };

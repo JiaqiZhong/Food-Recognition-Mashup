@@ -4,10 +4,10 @@ import './Recipes.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col } from 'react-bootstrap';
-import data from '../JSON/predictionsWithNutritionFacts';
+import recipesData from '../JSON/recipeContent.json';
 
 function Recipes() {  
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [recipes, setRecipes] = useState([]);
     const hasLoadedBefore = useRef(true)
 
@@ -21,14 +21,14 @@ function Recipes() {
         }
         else {
           console.log('component rendered');
-          getRecipes(`http://localhost:4000/recipes/find-recipes/${ingredients.join()}`);
+          //getRecipes(`http://localhost:4000/recipes/find-recipes/${ingredients.join()}`);
         }
       }, []);
 
     function getRecipes(url) {
         axios.get(url)
         .then((res) => {
-            let recipes = res.data;
+            let recipes = res.data.map(({ id, title, image }) => ({ id, title, image }))
             const promises = recipes.map(async (recipe) => {
                 try {
                     const res = await axios.get(`http://localhost:4000/recipes/${recipe.id}`);
@@ -37,6 +37,15 @@ function Recipes() {
                     recipe.cuisineType = res.data.cuisines;
                     recipe.diets = res.data.diets;
                     recipe.calories = res.data.nutrition.nutrients[1].amount;
+                    recipe.ingredients = res.data.extendedIngredients.map(ingredient => ingredient.original);
+                    recipe.instructions = res.data.analyzedInstructions.map((instruction) => ({
+                        name: instruction.name,
+                        steps: instruction.steps.map(step => ({
+                            number: step.number,
+                            step: step.step
+                        }))
+                    }));
+                    recipe.sourceUrl = res.data.sourceUrl;
                 } catch (err) {
                     console.log(err);
                 }                  
@@ -65,9 +74,9 @@ function Recipes() {
             ) : (
                 <div>
                     <Row>
-                        {recipes.map((recipe, index) => (
+                        {recipesData.map((recipe, index) => (
                             <Col xs={12} sm={6} md={4} lg={4} key={index}>
-                                {/* <Link to={`/Modules/${module.ModuleID}`} className="card-link"> */}
+                                <Link to={`/Recipes/${recipe.recipeID}`} className="card-link">
                                     <Card className="recipe-card">
                                         <Card.Img className="card-img-top w-100" src={recipe.image} alt="recipe" />
                                         <Card.Body className="card-body">
@@ -75,11 +84,11 @@ function Recipes() {
                                             <Card.Text>Calories (per serving): {recipe.calories} kcal</Card.Text>
                                             <Card.Text>Servings: {recipe.servings}</Card.Text>
                                             <Card.Text>Cooking Time: {recipe.prepTime}</Card.Text>
-                                            <Card.Text>Cuisine Type: {recipe.cuisineType}</Card.Text>
+                                            <Card.Text>Cuisine Type: {recipe.cuisineType.join(', ')}</Card.Text>
                                             <Card.Text>Diets: {recipe.diets.join(', ')}</Card.Text>
                                         </Card.Body>
                                     </Card>
-                                {/* </Link> */}
+                                </Link>
                             </Col>
                         ))}
                     </Row>

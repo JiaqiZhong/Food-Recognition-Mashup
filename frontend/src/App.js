@@ -7,6 +7,7 @@ import Landing from './Pages/Landing';
 import Preview from './Pages/Preview';
 import Recognition from './Pages/Recognition';
 import Recipes from './Pages/Recipes';
+import Recipe from './Pages/Recipe';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Preview" element={<Preview />}/>
           <Route path="/Recognition" element={<Recognition />}/>
           <Route path="/Recipes" element={<Recipes />}/>
+          <Route path="/Recipes/:recipeID" element={<Recipe />}/>
         </Routes>
       </BrowserRouter>
     </div>
