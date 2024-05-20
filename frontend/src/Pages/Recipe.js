@@ -8,23 +8,23 @@ import data from '../JSON/predictionsWithNutritionFacts';
 
 function Recipe() {
     //const { recipeID } = useParams();  
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [recipe, setRecipe] = useState([]);
-    const hasLoadedBefore = useRef(true)
+    const hasLoadedBefore = useRef(true);
 
     const location = useLocation();
-    const ingredients = location.state.ingredients;
+    const recipeDetails = location.state.recipeDetails;
 
-    // useEffect(() => {
-    //     if(hasLoadedBefore.current) {
-    //       console.log("Effect ran")
-    //       hasLoadedBefore.current = false;
-    //     }
-    //     else {
-    //       console.log('component rendered');
-    //       getRecipe(`http://localhost:4000/recipes/${recipeID}`);
-    //     }
-    //   }, []);
+    useEffect(() => {
+        if(hasLoadedBefore.current) {
+          console.log("Effect ran")
+          hasLoadedBefore.current = false;
+        }
+        else {
+          console.log('component rendered');
+          setRecipe(recipeDetails);
+        }
+      }, []);
 
     // function getRecipe(url) {
     //     axios.get(`http://localhost:4000/modules/${recipeId}`)
@@ -65,7 +65,7 @@ function Recipe() {
                 <div>Loading...</div>
             ) : (
                 <div>
-
+                    <h1>{recipeDetails.title}</h1>
                 </div>
             )}
         </div>
