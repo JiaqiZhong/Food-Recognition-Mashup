@@ -65,7 +65,23 @@ function Recipe() {
                 <div>Loading...</div>
             ) : (
                 <div>
+                    <img src={recipe.image} alt="recipe"></img>
                     <h1>{recipeDetails.title}</h1>
+                    <h2>Time Serving Calories</h2>
+                    <h3>{recipeDetails.prepTime} {recipeDetails.servings} {recipeDetails.calories}</h3>
+                    <h4>Ingredients</h4>
+                    <ul>
+                        {recipeDetails.ingredients.map(ingredient => <li>{ingredient}</li>)}
+                    </ul>
+                    <h5>Instructions</h5>
+                    {recipeDetails.instructions.map((instruction, instructionIndex) => (
+                        <div key={instructionIndex}>
+                            <h5>{instruction.name}</h5>
+                            {instruction.steps.map((step, stepIndex) => (
+                                <p key={stepIndex}>{step.number}. {step.step}</p>
+                            ))}
+                        </div>
+                    ))}
                 </div>
             )}
         </div>
