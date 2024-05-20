@@ -13,6 +13,7 @@ function Recipes() {
 
     const location = useLocation();
     const ingredients = location.state.ingredients;
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(hasLoadedBefore.current) {
@@ -23,7 +24,7 @@ function Recipes() {
           console.log('component rendered');
           //getRecipes(`http://localhost:4000/recipes/find-recipes/${ingredients.join()}`);
         }
-      }, []);
+    }, []);
 
     function getRecipes(url) {
         axios.get(url)
@@ -67,6 +68,12 @@ function Recipes() {
         })
     }
 
+    const handleClick = (e, recipeID) => {
+        e.preventDefault();
+        const recipeDetails = recipesData.find(recipe => recipe.id === recipeID);
+        navigate(`/Recipes/${recipeID}`, { state: { recipeDetails: recipeDetails } });
+    };
+
     return (
         <div className="recipes">
             {loading ? (
@@ -76,7 +83,7 @@ function Recipes() {
                     <Row>
                         {recipesData.map((recipe, index) => (
                             <Col xs={12} sm={6} md={4} lg={4} key={index}>
-                                <Link to={`/Recipes/${recipe.recipeID}`} className="card-link">
+                                <button onClick={(e) => handleClick(e, recipe.id)} className="card-link">
                                     <Card className="recipe-card">
                                         <Card.Img className="card-img-top w-100" src={recipe.image} alt="recipe" />
                                         <Card.Body className="card-body">
@@ -88,7 +95,7 @@ function Recipes() {
                                             <Card.Text>Diets: {recipe.diets.join(', ')}</Card.Text>
                                         </Card.Body>
                                     </Card>
-                                </Link>
+                                </button>
                             </Col>
                         ))}
                     </Row>
