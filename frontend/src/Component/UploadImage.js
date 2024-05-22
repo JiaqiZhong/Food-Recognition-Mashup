@@ -6,6 +6,7 @@ function UploadImage() {
 
     const handleFileChange = (e) => {
         const inputImage = e.target.files[0];
+        console.log(inputImage);
         if (inputImage) {
             const reader = new FileReader();
             reader.onloadend = () => {

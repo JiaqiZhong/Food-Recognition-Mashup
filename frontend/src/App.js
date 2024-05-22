@@ -8,6 +8,7 @@ import Preview from './Pages/Preview';
 import Recognition from './Pages/Recognition';
 import Recipes from './Pages/Recipes';
 import Recipe from './Pages/Recipe';
+import Snap from './Pages/Snap';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/Recognition" element={<Recognition />}/>
           <Route path="/Recipes" element={<Recipes />}/>
           <Route path="/Recipes/:recipeID" element={<Recipe />}/>
+          <Route path="/Snap" element={<Snap />}/>
         </Routes>
       </BrowserRouter>
     </div>
