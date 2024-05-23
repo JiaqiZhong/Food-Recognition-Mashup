@@ -78,7 +78,7 @@ function Recipe() {
                         <div className="ingredients">
                             <h4>Ingredients</h4>
                             <ul>
-                                {recipeDetails.ingredients.map(ingredient => <li>{ingredient}</li>)}
+                                {recipeDetails.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
                             </ul>
                         </div>
                         <div>
