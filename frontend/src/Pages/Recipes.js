@@ -83,7 +83,7 @@ function Recipes() {
                     <Row>
                         {recipesData.map((recipe, index) => (
                             <Col xs={12} sm={6} md={4} lg={4} key={index}>
-                                <button onClick={(e) => handleClick(e, recipe.id)} className="card-link">
+                                <button key={index} onClick={(e) => handleClick(e, recipe.id)} className="card-link">
                                     <Card className="recipe-card">
                                         <Card.Img className="card-img-top w-100" src={recipe.image} alt="recipe" />
                                         <Card.Body className="card-body">
