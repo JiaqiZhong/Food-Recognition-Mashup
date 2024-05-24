@@ -110,5 +110,453 @@
             }
         ],
         "sourceUrl": "https://www.foodista.com/recipe/YHS62KZ4/spicy-coconut-french-toast"
+    },
+    {
+        "id": 661752,
+        "title": "Strawberry And Vanilla Cream Bread Pudding with Toasted Coconut",
+        "image": "https://img.spoonacular.com/recipes/661751-312x231.jpg",
+        "prepTime": 45,
+        "servings": 5,
+        "cuisineType": [],
+        "diets": [
+            "dairy free",
+            "lacto ovo vegetarian"
+        ],
+        "calories": 9.7,
+        "ingredients": [
+            "2 cups vanilla pudding (prepared)",
+            "3 eggs",
+            "1 tsp. lemon zest",
+            "2 cups diced strawberries",
+            "9 slices of sandwich bread, cubed",
+            "1 cup shredded coconut, toasted"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Preheat Oven to 350 degrees"
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk together vanilla pudding, eggs, lemon zest, and strawberries."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Place bread pieces in a single layer on an un-greased, unlined, cookie sheet, and toast for 10 minutes or until crispy."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Fold bread pieces into the pudding mixture and pour into a 5\"x8\" pan."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Bake for 1 hour 15 minutes."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Garnish with toasted coconut."
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/C7BSL435/strawberry-and-vanilla-cream-bread-pudding-with-toasted-coconut"
+    },
+    {
+        "id": 661072,
+        "title": "Spicy Coconut French Toast",
+        "image": "https://img.spoonacular.com/recipes/661071-312x231.jpg",
+        "prepTime": 30,
+        "servings": 6,
+        "cuisineType": [
+            "American"
+        ],
+        "diets": [
+            "lacto ovo vegetarian"
+        ],
+        "calories": 27.76,
+        "ingredients": [
+            "4 eggs",
+            "1 loaf French bread, cut into 1 inch thick slices",
+            "Oil of frying",
+            "1/2 teaspoon ground cayenne pepper (less if sensitive to heat)",
+            "Pure Maple Syrup for serving",
+            "1/4 teaspoon nutmeg",
+            "pinch salt",
+            "1 tablespoon sugar",
+            "1 1/2 cups sweetened shredded coconut",
+            "1 teaspoon vanilla extract",
+            "1 cup whole milk"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Heat a large skillet to medium."
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk the milk, eggs, salt, vanilla extract, sugar, cayenne pepper, and nutmeg together in a baking dish or large bowl."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Pour the coconut onto a plate."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Pour enough oil in the skillet to completely coat the bottom. Dip each slice of bread into the egg mixture for 15-20 seconds per side.Then dip the slices in the coconut on both sides for an even coat.When the oil is hot, start frying one slice as a test batch. Cook for 1 minute per side. Watch for a crispy golden-brown crust. The coconut may turn a deep brown, but avoid BLACK! If the coconut burns before the crust has formed, turn the heat down a little."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Add more oil as needed and continue with the rest of the bread."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Serve warm with maple syrup and berries!"
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/YHS62KZ4/spicy-coconut-french-toast"
+    },
+    {
+        "id": 661753,
+        "title": "Strawberry And Vanilla Cream Bread Pudding with Toasted Coconut",
+        "image": "https://img.spoonacular.com/recipes/661751-312x231.jpg",
+        "prepTime": 45,
+        "servings": 5,
+        "cuisineType": [],
+        "diets": [
+            "dairy free",
+            "lacto ovo vegetarian"
+        ],
+        "calories": 9.7,
+        "ingredients": [
+            "2 cups vanilla pudding (prepared)",
+            "3 eggs",
+            "1 tsp. lemon zest",
+            "2 cups diced strawberries",
+            "9 slices of sandwich bread, cubed",
+            "1 cup shredded coconut, toasted"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Preheat Oven to 350 degrees"
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk together vanilla pudding, eggs, lemon zest, and strawberries."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Place bread pieces in a single layer on an un-greased, unlined, cookie sheet, and toast for 10 minutes or until crispy."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Fold bread pieces into the pudding mixture and pour into a 5\"x8\" pan."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Bake for 1 hour 15 minutes."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Garnish with toasted coconut."
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/C7BSL435/strawberry-and-vanilla-cream-bread-pudding-with-toasted-coconut"
+    },
+    {
+        "id": 661073,
+        "title": "Spicy Coconut French Toast",
+        "image": "https://img.spoonacular.com/recipes/661071-312x231.jpg",
+        "prepTime": 30,
+        "servings": 6,
+        "cuisineType": [
+            "American"
+        ],
+        "diets": [
+            "lacto ovo vegetarian"
+        ],
+        "calories": 27.76,
+        "ingredients": [
+            "4 eggs",
+            "1 loaf French bread, cut into 1 inch thick slices",
+            "Oil of frying",
+            "1/2 teaspoon ground cayenne pepper (less if sensitive to heat)",
+            "Pure Maple Syrup for serving",
+            "1/4 teaspoon nutmeg",
+            "pinch salt",
+            "1 tablespoon sugar",
+            "1 1/2 cups sweetened shredded coconut",
+            "1 teaspoon vanilla extract",
+            "1 cup whole milk"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Heat a large skillet to medium."
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk the milk, eggs, salt, vanilla extract, sugar, cayenne pepper, and nutmeg together in a baking dish or large bowl."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Pour the coconut onto a plate."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Pour enough oil in the skillet to completely coat the bottom. Dip each slice of bread into the egg mixture for 15-20 seconds per side.Then dip the slices in the coconut on both sides for an even coat.When the oil is hot, start frying one slice as a test batch. Cook for 1 minute per side. Watch for a crispy golden-brown crust. The coconut may turn a deep brown, but avoid BLACK! If the coconut burns before the crust has formed, turn the heat down a little."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Add more oil as needed and continue with the rest of the bread."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Serve warm with maple syrup and berries!"
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/YHS62KZ4/spicy-coconut-french-toast"
+    },
+    {
+        "id": 661754,
+        "title": "Strawberry And Vanilla Cream Bread Pudding with Toasted Coconut",
+        "image": "https://img.spoonacular.com/recipes/661751-312x231.jpg",
+        "prepTime": 45,
+        "servings": 5,
+        "cuisineType": [],
+        "diets": [
+            "dairy free",
+            "lacto ovo vegetarian"
+        ],
+        "calories": 9.7,
+        "ingredients": [
+            "2 cups vanilla pudding (prepared)",
+            "3 eggs",
+            "1 tsp. lemon zest",
+            "2 cups diced strawberries",
+            "9 slices of sandwich bread, cubed",
+            "1 cup shredded coconut, toasted"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Preheat Oven to 350 degrees"
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk together vanilla pudding, eggs, lemon zest, and strawberries."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Place bread pieces in a single layer on an un-greased, unlined, cookie sheet, and toast for 10 minutes or until crispy."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Fold bread pieces into the pudding mixture and pour into a 5\"x8\" pan."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Bake for 1 hour 15 minutes."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Garnish with toasted coconut."
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/C7BSL435/strawberry-and-vanilla-cream-bread-pudding-with-toasted-coconut"
+    },
+    {
+        "id": 661074,
+        "title": "Spicy Coconut French Toast",
+        "image": "https://img.spoonacular.com/recipes/661071-312x231.jpg",
+        "prepTime": 30,
+        "servings": 6,
+        "cuisineType": [
+            "American"
+        ],
+        "diets": [
+            "lacto ovo vegetarian"
+        ],
+        "calories": 27.76,
+        "ingredients": [
+            "4 eggs",
+            "1 loaf French bread, cut into 1 inch thick slices",
+            "Oil of frying",
+            "1/2 teaspoon ground cayenne pepper (less if sensitive to heat)",
+            "Pure Maple Syrup for serving",
+            "1/4 teaspoon nutmeg",
+            "pinch salt",
+            "1 tablespoon sugar",
+            "1 1/2 cups sweetened shredded coconut",
+            "1 teaspoon vanilla extract",
+            "1 cup whole milk"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Heat a large skillet to medium."
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk the milk, eggs, salt, vanilla extract, sugar, cayenne pepper, and nutmeg together in a baking dish or large bowl."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Pour the coconut onto a plate."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Pour enough oil in the skillet to completely coat the bottom. Dip each slice of bread into the egg mixture for 15-20 seconds per side.Then dip the slices in the coconut on both sides for an even coat.When the oil is hot, start frying one slice as a test batch. Cook for 1 minute per side. Watch for a crispy golden-brown crust. The coconut may turn a deep brown, but avoid BLACK! If the coconut burns before the crust has formed, turn the heat down a little."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Add more oil as needed and continue with the rest of the bread."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Serve warm with maple syrup and berries!"
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/YHS62KZ4/spicy-coconut-french-toast"
+    },
+    {
+        "id": 661755,
+        "title": "Strawberry And Vanilla Cream Bread Pudding with Toasted Coconut",
+        "image": "https://img.spoonacular.com/recipes/661751-312x231.jpg",
+        "prepTime": 45,
+        "servings": 5,
+        "cuisineType": [],
+        "diets": [
+            "dairy free",
+            "lacto ovo vegetarian"
+        ],
+        "calories": 9.7,
+        "ingredients": [
+            "2 cups vanilla pudding (prepared)",
+            "3 eggs",
+            "1 tsp. lemon zest",
+            "2 cups diced strawberries",
+            "9 slices of sandwich bread, cubed",
+            "1 cup shredded coconut, toasted"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Preheat Oven to 350 degrees"
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk together vanilla pudding, eggs, lemon zest, and strawberries."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Place bread pieces in a single layer on an un-greased, unlined, cookie sheet, and toast for 10 minutes or until crispy."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Fold bread pieces into the pudding mixture and pour into a 5\"x8\" pan."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Bake for 1 hour 15 minutes."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Garnish with toasted coconut."
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/C7BSL435/strawberry-and-vanilla-cream-bread-pudding-with-toasted-coconut"
+    },
+    {
+        "id": 661075,
+        "title": "Spicy Coconut French Toast",
+        "image": "https://img.spoonacular.com/recipes/661071-312x231.jpg",
+        "prepTime": 30,
+        "servings": 6,
+        "cuisineType": [
+            "American"
+        ],
+        "diets": [
+            "lacto ovo vegetarian"
+        ],
+        "calories": 27.76,
+        "ingredients": [
+            "4 eggs",
+            "1 loaf French bread, cut into 1 inch thick slices",
+            "Oil of frying",
+            "1/2 teaspoon ground cayenne pepper (less if sensitive to heat)",
+            "Pure Maple Syrup for serving",
+            "1/4 teaspoon nutmeg",
+            "pinch salt",
+            "1 tablespoon sugar",
+            "1 1/2 cups sweetened shredded coconut",
+            "1 teaspoon vanilla extract",
+            "1 cup whole milk"
+        ],
+        "instructions": [
+            {
+                "name": "",
+                "steps": [
+                    {
+                        "number": 1,
+                        "step": "Heat a large skillet to medium."
+                    },
+                    {
+                        "number": 2,
+                        "step": "Whisk the milk, eggs, salt, vanilla extract, sugar, cayenne pepper, and nutmeg together in a baking dish or large bowl."
+                    },
+                    {
+                        "number": 3,
+                        "step": "Pour the coconut onto a plate."
+                    },
+                    {
+                        "number": 4,
+                        "step": "Pour enough oil in the skillet to completely coat the bottom. Dip each slice of bread into the egg mixture for 15-20 seconds per side.Then dip the slices in the coconut on both sides for an even coat.When the oil is hot, start frying one slice as a test batch. Cook for 1 minute per side. Watch for a crispy golden-brown crust. The coconut may turn a deep brown, but avoid BLACK! If the coconut burns before the crust has formed, turn the heat down a little."
+                    },
+                    {
+                        "number": 5,
+                        "step": "Add more oil as needed and continue with the rest of the bread."
+                    },
+                    {
+                        "number": 6,
+                        "step": "Serve warm with maple syrup and berries!"
+                    }
+                ]
+            }
+        ],
+        "sourceUrl": "https://www.foodista.com/recipe/YHS62KZ4/spicy-coconut-french-toast"
     }
 ]
