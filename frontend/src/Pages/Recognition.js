@@ -4,6 +4,7 @@ import './Recognition.css';
 import axios from 'axios';
 import data from '../JSON/predictionsWithNutritionFacts';
 import UploadOrSnap from '../Component/UploadOrSnap';
+import Recipes from './Recipes';
 
 function Recognition() {
   const [isNutritionFacs, setIsNutritionFacts] = useState(true);
@@ -11,6 +12,7 @@ function Recognition() {
   const [predictedResults, setPredictedResults] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [manuallyEnteredIngredients, setManuallyEnteredIngredients] = useState('');
+  const [isSearchRecipes, setIsSearchRecipes] = useState(false);
   const checkBoxRef = useRef({});
   const hasLoadedBefore = useRef(true);
   const navigate = useNavigate();
@@ -101,7 +103,13 @@ function Recognition() {
   const handleSearch = (e) => {
     e.preventDefault();
     console.log(selectedIngredients);
-    navigate(`/Recipes`, { state: { ingredients: selectedIngredients } });
+    //navigate(`/Recipes`, { state: { ingredients: selectedIngredients } });
+    setIsSearchRecipes(true);
+  }
+
+  const handleNutritionFacts = (e) => {
+    e.preventDefault();
+    setIsSearchRecipes(false);
   }
 
   // Delete a selected ingredient
@@ -121,9 +129,9 @@ function Recognition() {
         ) : (
         <div>
           <div className="button-panel">
-              {/* <NutritionFacts/>
-              <Recipes/> */}
           </div>
+          <button onClick={handleNutritionFacts}>Nutrition Facts</button>
+          <button onClick={handleSearch}>Find Recipes</button>
           <p>Which one did I guess right? Select them to find your favourite recipes ^_^</p>
           {selectedIngredients.map((selectedIngredient, index) => {
             return (
@@ -132,46 +140,49 @@ function Recognition() {
           })}
           <input id="textarea" value={manuallyEnteredIngredients} placeholder="Add more here..." onChange={handleTextAreaChange}></input>
           <button onClick={handleAddIngredient}>Add</button>
-          <button onClick={handleSearch}>Search</button>
-          <div className="predicted-results">
-            <div className="view-panel">
-              {imageFile && <img id="preview-img" src={URL.createObjectURL(imageFile)} alt="food-image" />}
-              <UploadOrSnap />
+          {!isSearchRecipes ? (
+            <div className="predicted-results">
+              <div className="view-panel">
+                {imageFile && <img id="preview-img" src={URL.createObjectURL(imageFile)} alt="food-image" />}
+                <UploadOrSnap />
+              </div>
+              <div className="table-panel">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>&nbsp;</th>
+                      <th>Food</th>
+                      <th>Probability(%)</th>
+                      <th>Energy(kcal)</th>
+                      <th>Protein(kcal)</th>
+                      <th>Fat(kcal)</th>
+                      <th>Carbohydrates(kcal)</th>
+                    </tr>
+                  </thead>
+                  {//predictedResults && (
+                    <tbody>
+                      {data.map((result) => (
+                        <tr key={result.name}>
+                          <td><input id="checkbox" value={result.name} type="checkbox" 
+                          ref={(ref) => (checkBoxRef.current[result.name] = ref)}
+                          onChange={handleCheckboxChange}/></td>
+                          <td>{result.name}</td>
+                          <td>{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
+                          <td>{result.energy}</td>
+                          <td>{result.protein}</td>
+                          <td>{result.fat}</td>
+                          <td>{result.carb}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  //)}
+                  }
+                </table>
+              </div>
             </div>
-            <div className="table-panel">
-              <table>
-                <thead>
-                  <tr>
-                    <th>&nbsp;</th>
-                    <th>Food</th>
-                    <th>Probability(%)</th>
-                    <th>Energy(kcal)</th>
-                    <th>Protein(kcal)</th>
-                    <th>Fat(kcal)</th>
-                    <th>Carbohydrates(kcal)</th>
-                  </tr>
-                </thead>
-                {//predictedResults && (
-                  <tbody>
-                    {data.map((result) => (
-                      <tr key={result.name}>
-                        <td><input id="checkbox" value={result.name} type="checkbox" 
-                        ref={(ref) => (checkBoxRef.current[result.name] = ref)}
-                        onChange={handleCheckboxChange}/></td>
-                        <td>{result.name}</td>
-                        <td>{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
-                        <td>{result.energy}</td>
-                        <td>{result.protein}</td>
-                        <td>{result.fat}</td>
-                        <td>{result.carb}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                //)}
-                }
-              </table>
-            </div>
-          </div>
+          ) : (
+            <Recipes ingredients={selectedIngredients}/>
+          )}
         </div>
       )}
     </div>

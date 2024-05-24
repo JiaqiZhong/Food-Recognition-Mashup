@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col } from 'react-bootstrap';
 import recipesData from '../JSON/recipeContent.json';
 
-function Recipes() {  
+function Recipes(ingredients) {  
     const [loading, setLoading] = useState(false);
     const [recipes, setRecipes] = useState([]);
     const hasLoadedBefore = useRef(true)
@@ -21,7 +21,7 @@ function Recipes() {
     }, [currentPage]);
 
     const location = useLocation();
-    const ingredients = location.state.ingredients;
+    //const ingredients = location.state.ingredients;
     const navigate = useNavigate();
 
     useEffect(() => {
