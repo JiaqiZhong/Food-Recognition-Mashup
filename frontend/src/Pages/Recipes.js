@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import Pagination from '../Component/Pagination'
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import './Recipes.css';
 import axios from 'axios';
@@ -10,6 +11,14 @@ function Recipes() {
     const [loading, setLoading] = useState(false);
     const [recipes, setRecipes] = useState([]);
     const hasLoadedBefore = useRef(true)
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 6
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * pageSize;
+        const lastPageIndex = firstPageIndex + pageSize;
+        return recipesData.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage]);
 
     const location = useLocation();
     const ingredients = location.state.ingredients;
@@ -81,7 +90,7 @@ function Recipes() {
             ) : (
                 <div>
                     <Row>
-                        {recipesData.map((recipe, index) => (
+                        {currentTableData.map((recipe, index) => (
                             <Col xs={12} sm={6} md={4} lg={4} key={index}>
                                 <button key={index} onClick={(e) => handleClick(e, recipe.id)} className="card-link">
                                     <Card className="recipe-card">
@@ -99,6 +108,13 @@ function Recipes() {
                             </Col>
                         ))}
                     </Row>
+                    <Pagination
+                      className="pagination-bar"
+                      currentPage={currentPage}
+                      totalCount={recipesData.length}
+                      pageSize={pageSize}
+                      onPageChange={page => setCurrentPage(page)}
+                    />
                 </div>
             )}
         </div>
