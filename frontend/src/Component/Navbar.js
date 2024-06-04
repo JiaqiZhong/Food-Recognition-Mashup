@@ -40,10 +40,10 @@ function Navbar() {
                             Nutrition Tips
                         </a>
                         <a href="#" className="text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                            History
+                            Collections
                         </a>
                         <a href="#" className="text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                            Collections
+                            About Us
                         </a>
                         </div>
                     </div>
@@ -61,12 +61,14 @@ function Navbar() {
                             >
                                 <span className="absolute -inset-1.5"></span>
                                 <span className="sr-only">Open user menu</span>
-                                <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="user profile" />
+                                <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                    <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                                </div>
                             </button>
                         </div>
 
                         {/* Dropdown menu */}
-                        <div
+                        {/* <div
                             className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu"
                             aria-orientation="vertical"
@@ -82,7 +84,7 @@ function Navbar() {
                             <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">
                                 Sign out
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -98,10 +100,10 @@ function Navbar() {
                 Nutrition Tips
                 </a>
                 <a href="#" className="text-white hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
-                History
+                Collections
                 </a>
                 <a href="#" className="text-white hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
-                Collections
+                About Us
                 </a>
             </div>
         </div>
