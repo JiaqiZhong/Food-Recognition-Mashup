@@ -5,6 +5,8 @@ import axios from 'axios';
 import data from '../JSON/predictionsWithNutritionFacts';
 import UploadOrSnap from '../Component/UploadOrSnap';
 import Recipes from './Recipes';
+import ButtonGroup from '../Component/ButtonGroup';
+import { SecondaryButton } from '../Component/Buttons';
 
 function Recognition() {
   const [isNutritionFacs, setIsNutritionFacts] = useState(true);
@@ -128,10 +130,10 @@ function Recognition() {
             <div>Loading...</div>
         ) : (
         <div>
-          <div className="button-panel">
-          </div>
-          <button onClick={handleNutritionFacts}>Nutrition Facts</button>
-          <button onClick={handleSearch}>Find Recipes</button>
+          <ButtonGroup>
+            <SecondaryButton onClick={handleNutritionFacts} isActive={!isSearchRecipes}>Nutrition Facts</SecondaryButton>
+            <SecondaryButton onClick={handleSearch} isActive={isSearchRecipes}>Find Recipes</SecondaryButton>
+          </ButtonGroup>
           <p>Which one did I guess right? Select them to find your favourite recipes ^_^</p>
           {selectedIngredients.map((selectedIngredient, index) => {
             return (

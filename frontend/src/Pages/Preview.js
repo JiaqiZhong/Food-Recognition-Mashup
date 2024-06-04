@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Preview.css';
+import ButtonGroup from '../Component/ButtonGroup';
+import { PrimaryButton } from '../Component/Buttons';
 
 function Preview() {
     const location = useLocation();
@@ -19,6 +21,11 @@ function Preview() {
         //getPredictions("http://localhost:4000/recognition/upload", formData);
         //getNutritionFacts("apple");
         navigate(`/Recognition`, { state: { image: imageFile } });
+    }
+
+    const handleCancel = (e) => {
+        e.preventDefault();
+        navigate("/");
     }
 
     function getNutritionFacts(ingredient) {
@@ -45,15 +52,15 @@ function Preview() {
     }
 
     return (
-        <div className="preview">
+        <div className="flex flex-col text-center items-center justify-center h-screen">
             {loading ? (
                 <div>Loading...</div>
             ) : (
                 <div>
-                    {imageFile && <img id="preview-img" src={URL.createObjectURL(imageFile)} alt="uploaded" />}
-                    <div>
-                        <Link to="/"><button>Cancel</button></Link>
-                        <button onClick={handleConfirm}>Confirm</button>
+                    {imageFile && <img className="w-80" id="preview-img" src={URL.createObjectURL(imageFile)} alt="uploaded" />}
+                    <ButtonGroup>
+                        <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+                        <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
                         {/* {nutritionFacts && (
                             <ul>
                                 <li>Energy: {nutritionFacts.energy.quantity}</li>
@@ -62,7 +69,7 @@ function Preview() {
                                 <li>Carbohydrates: {nutritionFacts.c.quantity}</li>
                             </ul>
                         )} */}
-                    </div>
+                    </ButtonGroup>
                 </div>
             )}
         </div>
