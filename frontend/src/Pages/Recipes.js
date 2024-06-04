@@ -12,7 +12,7 @@ function Recipes(ingredients) {
     const [recipes, setRecipes] = useState([]);
     const hasLoadedBefore = useRef(true)
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 6
+    const pageSize = 9
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * pageSize;

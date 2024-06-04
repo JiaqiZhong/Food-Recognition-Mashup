@@ -124,6 +124,8 @@ function Recognition() {
     }
   }
 
+  // ketogenic, lowFodmap, vegan, vegetarian, whole30
+
   return (
     <div className="main">
         {loading ? (
