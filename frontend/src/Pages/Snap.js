@@ -1,4 +1,6 @@
 import React, { useRef, useCallback, useState } from "react";
+import { PrimaryButton } from '../Component/Buttons';
+import ButtonGroup from '../Component/ButtonGroup';
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 
@@ -54,22 +56,22 @@ function Snap() {
     }
 
     return (
-        <div>
+        <div className="flex flex-col text-center items-center justify-center h-screen">
             {imgSrc ? (
                 <img src={imgSrc} alt="webcam" />
             ) : (
                 <Webcam height={600} width={600} ref={webcamRef} mirrored={true}/>
             )}
             {isStateOne ? ( 
-                <div>
-                    <button onClick={handleCapture}>Snap</button>
-                    <button onClick={handleCancel}>Cancel</button>
-                </div>
+                <ButtonGroup>
+                    <PrimaryButton onClick={handleCapture}>Snap</PrimaryButton>
+                    <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+                </ButtonGroup>
             ) : (
-                <div>
-                    <button onClick={handleRetake}>Retake</button>
-                    <button onClick={handleConfirm}>Confirm</button>
-                </div>
+                <ButtonGroup>
+                    <PrimaryButton onClick={handleRetake}>Retake</PrimaryButton>
+                    <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
+                </ButtonGroup>
             )}
         </div>
     );

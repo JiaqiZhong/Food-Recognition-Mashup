@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PrimaryButton } from './Buttons';
+import ButtonGroup from './ButtonGroup';
 
 // Basic welcome page that allows user to select login or sign in
 function UploadOrSnap() { 
@@ -26,27 +28,26 @@ function UploadOrSnap() {
   }
 
   return (
-    <div className="upload-or-snap">
-      <div className="button-panel">
-        <div>
-            <input
-                type="file"
-                id="imgFile"
-                onChange={handleUploadAnImage}
-                hidden
-                />
-            <label
-                htmlFor="imgFile"
-                type="button"
-                id="uploadImage">
-                Upload An Image
-            </label>
-        </div>
-        <div>
-            <button onClick={handleTakeAPhoto}>Take A Photo</button>
-        </div>
+    <ButtonGroup>
+      <div>
+        <input
+            type="file"
+            id="imgFile"
+            onChange={handleUploadAnImage}
+            hidden
+            />
+        <label
+            htmlFor="imgFile"
+            type="button"
+            className="bg-orange-400 text-white font-bold py-2 px-4 m-2 rounded shadow-md w-full"
+            id="uploadImage">
+            Upload An Image
+        </label>
       </div>
-    </div>
+      <div>
+          <PrimaryButton onClick={handleTakeAPhoto}>Take A Photo</PrimaryButton>
+      </div>
+    </ButtonGroup>
   );
 }
 

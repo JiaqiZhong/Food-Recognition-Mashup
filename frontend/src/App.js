@@ -9,10 +9,12 @@ import Recognition from './Pages/Recognition';
 import Recipes from './Pages/Recipes';
 import Recipe from './Pages/Recipe';
 import Snap from './Pages/Snap';
+import Navbar from './Component/Navbar';
 
 function App() {
   return (
     <div className="app">
+      <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />}/>
