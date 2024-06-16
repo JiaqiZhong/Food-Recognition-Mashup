@@ -3,7 +3,7 @@ import React from 'react';
 const PrimaryButton = ({ children, onClick }) => {
   return (
     <button
-      className="bg-orange-400 font-bold text-white py-2 px-4 m-2 rounded shadow-md w-full"
+      className="bg-white font-bold text-lg text-gray-800 font-georgia py-2 px-4 rounded w-full shadow-custom"
       onClick={onClick}
     >
       {children}
@@ -14,8 +14,8 @@ const PrimaryButton = ({ children, onClick }) => {
 const SecondaryButton = ({ children, onClick, isActive }) => {
   return (
     <button
-      className={`border-2 border-orange-400 font-bold text-orange-400 py-2 px-4 m-2 rounded shadow-md w-full ${
-          isActive ? 'bg-orange-400 text-white' : 'bg-transparent text-orange-400'
+      className={`border-2 border-gray-800 font-bold text-gray-800 py-2 px-4 rounded shadow-md w-full ${
+          isActive ? 'bg-gray-800 text-white' : 'bg-transparent text-orange-400'
       }`}
       onClick={onClick}
     >

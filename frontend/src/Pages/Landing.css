@@ -1,16 +1,13 @@
-.landing {
+/* .landing {
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-}
-
-.croissant {
-    width: 400px;
-}
-
-button {
-    margin: 20px;
-}
+    height: calc(100vh - 20px);
+    background-image: url("../Images/wooden-tray.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+} */
