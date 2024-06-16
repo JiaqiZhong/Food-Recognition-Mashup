@@ -4,6 +4,7 @@ import './Recognition.css';
 import axios from 'axios';
 import data from '../JSON/predictionsWithNutritionFacts';
 import UploadOrSnap from '../Component/UploadOrSnap';
+import Preview from './Preview';
 import Recipes from './Recipes';
 import ButtonGroup from '../Component/ButtonGroup';
 import { SecondaryButton } from '../Component/Buttons';
@@ -96,8 +97,10 @@ function Recognition() {
   // Add the manually entered ingredients to selected ingredients
   const handleAddIngredient = (e) => {
     e.preventDefault();
-    setSelectedIngredients([...selectedIngredients, manuallyEnteredIngredients]);
-    // Empty the textarea
+    if (manuallyEnteredIngredients !== '') {
+      setSelectedIngredients([...selectedIngredients, manuallyEnteredIngredients]);
+    }
+      // Empty the textarea
     setManuallyEnteredIngredients('');
   }
 
@@ -127,30 +130,51 @@ function Recognition() {
   // ketogenic, lowFodmap, vegan, vegetarian, whole30
 
   return (
-    <div className="main">
+    <div className="flex flex-col text-center items-center justify-center bg-wooden-tray-only bg-cover bg-center bg-no-repeat text-white h-full">
         {loading ? (
             <div>Loading...</div>
         ) : (
-        <div>
+        <div className="space-y-4">
           <ButtonGroup>
             <SecondaryButton onClick={handleNutritionFacts} isActive={!isSearchRecipes}>Nutrition Facts</SecondaryButton>
             <SecondaryButton onClick={handleSearch} isActive={isSearchRecipes}>Find Recipes</SecondaryButton>
           </ButtonGroup>
           <p>Which one did I guess right? Select them to find your favourite recipes ^_^</p>
-          {selectedIngredients.map((selectedIngredient, index) => {
-            return (
-              <button key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>{selectedIngredient}</button>
-            );
-          })}
-          <input id="textarea" value={manuallyEnteredIngredients} placeholder="Add more here..." onChange={handleTextAreaChange}></input>
-          <button onClick={handleAddIngredient}>Add</button>
+          <div className="flex flex-row justify-center space-x-2">
+            {selectedIngredients.map((selectedIngredient, index) => {
+              return (
+                <button className="bg-button bg-contain bg-center bg-no-repeat text-gray-800 font-georgia font-bold p-4 whitespace-break-spaces" key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>
+                {
+                  selectedIngredient.includes(" ") ?
+                    // Split by spaces if there are spaces in selectedIngredient
+                    selectedIngredient.split(" ").map((word, idx) => (
+                      <div key={idx}>
+                        {word}
+                        <br />
+                      </div>
+                    ))
+                  :
+                    // Split into chunks of up to 9 characters using regex if no spaces
+                    selectedIngredient.match(/.{1,9}/g).map((chunk, idx) => (
+                      <div key={idx}>
+                        {chunk}
+                        <br />
+                      </div>
+                    ))
+                }
+                </button>
+              );
+            })}
+            <input className="bg-black rounded h-8 border-1 border-white" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more here..." onChange={handleTextAreaChange}></input>
+            <button className="bg-white text-gray-800 font-georgia font-bold px-2 h-8 rounded shadow-custom" onClick={handleAddIngredient}>Add</button>
+          </div>
           {!isSearchRecipes ? (
-            <div className="predicted-results">
-              <div className="view-panel">
-                {imageFile && <img id="preview-img" src={URL.createObjectURL(imageFile)} alt="food-image" />}
+            <div className="flex flex-col lg:flex-row lg:space-x-4 mx-4">
+              <div className="flex flex-col text-center items-center justify-center">
+                {imageFile && <img className="w-80 shadow-custom" src={URL.createObjectURL(imageFile)} alt="food-image" />}
                 <UploadOrSnap />
               </div>
-              <div className="table-panel">
+              <div>
                 <table>
                   <thead>
                     <tr>

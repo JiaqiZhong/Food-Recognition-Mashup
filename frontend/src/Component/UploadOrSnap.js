@@ -29,7 +29,7 @@ function UploadOrSnap() {
 
   return (
     <ButtonGroup>
-      <div>
+      <div className>
         <input
             type="file"
             id="imgFile"
@@ -39,7 +39,7 @@ function UploadOrSnap() {
         <label
             htmlFor="imgFile"
             type="button"
-            className="bg-orange-400 text-white font-bold py-2 px-4 m-2 rounded shadow-md w-full"
+            className="bg-white font-bold text-lg font-georgia text-gray-800 py-2 px-4 rounded w-full shadow-custom"
             id="uploadImage">
             Upload An Image
         </label>

@@ -52,12 +52,12 @@ function Preview() {
     }
 
     return (
-        <div className="flex flex-col text-center items-center justify-center h-screen">
+        <div className="flex flex-col text-center items-center justify-center bg-original bg-cover bg-center bg-no-repeat h-[calc(100vh-20px)]">
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <div>
-                    {imageFile && <img className="w-80" id="preview-img" src={URL.createObjectURL(imageFile)} alt="uploaded" />}
+                <div className="m-4">
+                    {imageFile && <img className="w-80 shadow-custom" src={URL.createObjectURL(imageFile)} alt="uploaded" />}
                     <ButtonGroup>
                         <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
                         <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>

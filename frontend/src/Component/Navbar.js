@@ -1,11 +1,11 @@
 import React from 'react';
-import croissant from '../Images/croissant.jpg'
+import croissant from '../Images/croissant.png'
 
 function Navbar() {
   return (
-    <nav className="bg-orange-400">
+    <nav className="bg-gray-800">
         <div className="mx-auto max-w-7xl px-6">
-            <div className="relative flex h-16 items-center justify-between">
+            <div className="relative flex h-14 items-center justify-between">
                 <div className="absolute flex items-center sm:hidden">
                     {/* Mobile menu button */}
                     <button
