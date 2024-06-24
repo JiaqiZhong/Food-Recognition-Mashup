@@ -130,76 +130,84 @@ function Recognition() {
   // ketogenic, lowFodmap, vegan, vegetarian, whole30
 
   return (
-    <div className="flex flex-col text-center items-center justify-center bg-wooden-tray-only bg-cover bg-center bg-no-repeat text-white h-full">
+    <div className="flex flex-col text-center items-center justify-center text-white h-full">
         {loading ? (
             <div>Loading...</div>
         ) : (
-        <div className="space-y-4">
-          <ButtonGroup>
+        <div className="m-4 mx-8 space-y-2">
+          <div className="flex flex-row border border-secondaryButtonColor rounded p-1">
             <SecondaryButton onClick={handleNutritionFacts} isActive={!isSearchRecipes}>Nutrition Facts</SecondaryButton>
             <SecondaryButton onClick={handleSearch} isActive={isSearchRecipes}>Find Recipes</SecondaryButton>
-          </ButtonGroup>
-          <p>Which one did I guess right? Select them to find your favourite recipes ^_^</p>
-          <div className="flex flex-row justify-center space-x-2">
-            {selectedIngredients.map((selectedIngredient, index) => {
-              return (
-                <button className="bg-button bg-contain bg-center bg-no-repeat text-gray-800 font-georgia font-bold p-4 whitespace-break-spaces" key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>
-                {
-                  selectedIngredient.includes(" ") ?
-                    // Split by spaces if there are spaces in selectedIngredient
-                    selectedIngredient.split(" ").map((word, idx) => (
-                      <div key={idx}>
-                        {word}
-                        <br />
-                      </div>
-                    ))
-                  :
-                    // Split into chunks of up to 9 characters using regex if no spaces
-                    selectedIngredient.match(/.{1,9}/g).map((chunk, idx) => (
-                      <div key={idx}>
-                        {chunk}
-                        <br />
-                      </div>
-                    ))
-                }
-                </button>
-              );
-            })}
-            <input className="bg-black rounded h-8 border-1 border-white" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more here..." onChange={handleTextAreaChange}></input>
+          </div>
+          <p className="m-2 font-serif text-xl">Which one did I guess right? Select them to find your favourite recipes!</p>
+          <div className="space-x-3">
+            <input className="bg-transparent rounded h-8 border border-white w-80 font-serif text-lg" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more ingredients here, one at a time" onChange={handleTextAreaChange}></input>
             <button className="bg-white text-gray-800 font-georgia font-bold px-2 h-8 rounded shadow-custom" onClick={handleAddIngredient}>Add</button>
           </div>
+          {/* <div className="flex flex-wrap text-center items-center justify-center space-x-2"> */}
+            <div className="flex flex-wrap text-center items-center justify-center">
+              {selectedIngredients.map((selectedIngredient, index) => {
+                return (
+                  <button className="bg-button bg-contain bg-center bg-no-repeat text-gray-800 font-georgia font-bold p-6" key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>
+                    {
+                      selectedIngredient.includes(" ") ?
+                        // Split by spaces if there are spaces in selectedIngredient
+                        selectedIngredient.split(" ").map((word, idx) => (
+                          <div key={idx}>
+                            {word}
+                            <br />
+                          </div>
+                        ))
+                      :
+                        // Split into chunks of up to 9 characters using regex if no spaces
+                        selectedIngredient.match(/.{1,9}/g).map((chunk, idx) => (
+                          <div key={idx}>
+                            {chunk}
+                            <br />
+                          </div>
+                        ))
+                    }
+                  </button>
+                );
+              })}
+            </div>
+          {/* </div> */}
           {!isSearchRecipes ? (
-            <div className="flex flex-col lg:flex-row lg:space-x-4 mx-4">
-              <div className="flex flex-col text-center items-center justify-center">
-                {imageFile && <img className="w-80 shadow-custom" src={URL.createObjectURL(imageFile)} alt="food-image" />}
-                <UploadOrSnap />
+            <div className="flex flex-col md:flex-row md:space-x-4 mx-4">
+              <div className="flex flex-col text-center items-center">
+                <div className="mx-4 max-w-80">
+                  {imageFile && <img className="w-80 shadow-custom" src={URL.createObjectURL(imageFile)} alt="food-image" />}
+                  <UploadOrSnap />
+                </div>
               </div>
-              <div>
-                <table>
+              <div className="font-serif text-lg text-black bg-paper bg-100 bg-center bg-no-repeatrounded p-10">
+                {/* <table className="table-auto bg-white bg-opacity-75 rounded"> */}
+                {/* <table className="table-auto bg-paper bg-cover bg-center bg-no-repeat"> */}
+                <table className="table-auto m-2">
                   <thead>
-                    <tr>
+                    <tr className="w-auto">
                       <th>&nbsp;</th>
                       <th>Food</th>
-                      <th>Probability(%)</th>
-                      <th>Energy(kcal)</th>
-                      <th>Protein(kcal)</th>
-                      <th>Fat(kcal)</th>
-                      <th>Carbohydrates(kcal)</th>
+                      <th class="whitespace-pre-line">Probability (%)</th>
+                      <th class="whitespace-pre-line">Energy (kcal)</th>
+                      <th class="whitespace-pre-line">Protein (kcal)</th>
+                      <th class="whitespace-pre-line">Fat (kcal)</th>
+                      <th class="whitespace-pre-line">Carbohydrates (kcal)</th>
                     </tr>
                   </thead>
                   {//predictedResults && (
                     <tbody>
                       {data.map((result) => (
                         <tr key={result.name}>
-                          <td><input id="checkbox" value={result.name} type="checkbox" 
+                          <td className="border-b border-gridColor border-opacity-50"><input id="checkbox" value={result.name} type="checkbox" 
                           ref={(ref) => (checkBoxRef.current[result.name] = ref)}
                           onChange={handleCheckboxChange}/></td>
-                          <td>{result.name}</td>
-                          <td>{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
-                          <td>{result.energy}</td>
-                          <td>{result.protein}</td>
-                          <td>{result.fat}</td>
-                          <td>{result.carb}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.name}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.energy}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.protein}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.fat}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.carb}</td>
                         </tr>
                       ))}
                     </tbody>

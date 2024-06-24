@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PrimaryButton } from './Buttons';
 import ButtonGroup from './ButtonGroup';
@@ -6,6 +6,7 @@ import ButtonGroup from './ButtonGroup';
 // Basic welcome page that allows user to select login or sign in
 function UploadOrSnap() { 
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   // Button listener for "Upload An Image"
   const handleUploadAnImage = (e) => {
@@ -27,22 +28,20 @@ function UploadOrSnap() {
     navigate('/Snap');
   }
 
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
+  }
+
   return (
     <ButtonGroup>
-      <div className>
+      <div>
+        <PrimaryButton onClick={triggerFileInput}>Upload An Image</PrimaryButton>
         <input
             type="file"
-            id="imgFile"
+            ref={fileInputRef}
             onChange={handleUploadAnImage}
             hidden
-            />
-        <label
-            htmlFor="imgFile"
-            type="button"
-            className="bg-white font-bold text-lg font-georgia text-gray-800 py-2 px-4 rounded w-full shadow-custom"
-            id="uploadImage">
-            Upload An Image
-        </label>
+        />
       </div>
       <div>
           <PrimaryButton onClick={handleTakeAPhoto}>Take A Photo</PrimaryButton>

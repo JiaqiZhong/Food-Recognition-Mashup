@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import './Recipe.css';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Row, Col } from 'react-bootstrap';
 import data from '../JSON/predictionsWithNutritionFacts';
+import cookingTimeIcon from '../Images/cooking-time-icon.png';
+import caloriesIcon from '../Images/calories-icon.png';
+import servingSizeIcon from '../Images/serving-size-icon.png';
 
 function Recipe() {
     //const { recipeID } = useParams();  
@@ -60,39 +60,61 @@ function Recipe() {
     // }
 
     return (
-        <div className="recipe">
+        <div className="flex flex-col items-center justify-center text-black h-full">
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <div>
-                    <div className="recipe-general-info">
-                        <img src={recipe.image} alt="recipe"></img>
-                        <div>
-                            <h1>{recipeDetails.title}</h1>
-                            <h2>Time Serving Calories</h2>
-                            <h3>{recipeDetails.prepTime}min {recipeDetails.servings} {recipeDetails.calories}kcal</h3>
-                            <h3>Diets: {recipeDetails.diets.join(", ")}</h3>
-                        </div>
-                    </div>
-                    <div className="ingredients-and-instructions">
-                        <div className="ingredients">
-                            <h4>Ingredients</h4>
-                            <ul>
-                                {recipeDetails.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
-                            </ul>
-                        </div>
-                        <div>
-                            <h5>Instructions</h5>
-                            {recipeDetails.instructions.map((instruction, instructionIndex) => (
-                                <div key={instructionIndex}>
-                                    <h5>{instruction.name}</h5>
-                                    {instruction.steps.map((step, stepIndex) => (
-                                        <p key={stepIndex}>{step.number}. {step.step}</p>
-                                    ))}
+                <div className="flex flex-row items-center justify-center m-6">
+                    <div className="w-96"></div>
+                    <div className="flex flex-row bg-notebook bg-100 bg-center bg-no-repeat rounded p-6 space-x-8">
+                        <div className="flex-1 flex flex-col space-y-4 m-4">
+                            <h1 className="font-georgia font-bold text-xl">{recipeDetails.title}</h1>
+                            <div className="font-serif text-lg flex flex-row items-center justify-between">
+                                <div className="flex flex-row items-center space-x-1">
+                                    <img src={cookingTimeIcon} className="w-8"></img>
+                                    <p>{recipeDetails.prepTime} minutes</p>
                                 </div>
-                            ))}
+                                <div className="flex flex-row items-center space-x-1">
+                                    <img src={servingSizeIcon} className="w-8"></img>
+                                    <p>{recipeDetails.servings} servings</p>
+                                </div>
+                                <div className="flex flex-row items-center space-x-1">
+                                    <img src={caloriesIcon} className="w-8"></img>
+                                    <p>{recipeDetails.calories} kcal</p>
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap text-center items-center space-x-3">
+                                {recipeDetails.diets.map((diet, index) => {
+                                    return (
+                                        <label className="bg-white bg-opacity-75 text-gray-800 rounded font-serif font-bold px-2 py-1" key={index}>{diet}</label>
+                                    )
+                                })}
+                            </div>
+                            <div className="flex">
+                                <img className="w-full" src={recipe.image} alt="recipe"></img>
+                            </div>
+                        </div>
+                        <div className="flex-1 flex flex-col space-y-6 m-4 pt-2 pr-8">
+                            <div className="relative text-black bg-white bg-opacity-25 p-4 rounded">
+                                <h5 className="absolute top-0 left-20 transform -translate-x-1/2 -translate-y-1/2 font-georgia font-bold italic text-lg">Ingredients</h5>
+                                <ul className="font-serif list-disc list-inside">
+                                    {recipeDetails.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
+                                </ul>
+                            </div>
+                            <div className="relative text-black bg-white bg-opacity-25 p-4 rounded">
+                                <h5 className="absolute top-0 left-20 transform -translate-x-1/2 -translate-y-1/2 font-georgia font-bold italic text-lg">Instructions</h5>
+                                {recipeDetails.instructions.map((instruction, instructionIndex) => (
+                                    <div key={instructionIndex}>
+                                        <h3 className="font-serif text-lg">{instruction.name}</h3>
+                                        {instruction.steps.map((step, stepIndex) => (
+                                            <p className="font-serif" key={stepIndex}>{step.number}. {step.step}</p>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
+                    <div className="w-96"></div>
                 </div>
             )}
         </div>

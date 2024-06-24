@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import logo from './logo.svg';
-import './App.css';
 
 import Landing from './Pages/Landing';
 import Preview from './Pages/Preview';
@@ -13,20 +12,41 @@ import Navbar from './Component/Navbar';
 
 function App() {
   return (
-    <div className="app">
-      <Navbar />
+    <div>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />}/>
-          <Route path="/Preview" element={<Preview />}/>
-          <Route path="/Recognition" element={<Recognition />}/>
-          <Route path="/Recipes" element={<Recipes />}/>
-          <Route path="/Recipes/:recipeID" element={<Recipe />}/>
-          <Route path="/Snap" element={<Snap />}/>
-        </Routes>
+        <BackgroundWrapper>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Landing />}/>
+            <Route path="/Preview" element={<Preview />}/>
+            <Route path="/Recognition" element={<Recognition />}/>
+            <Route path="/Recipes" element={<Recipes />}/>
+            <Route path="/Recipes/:recipeID" element={<Recipe />}/>
+            <Route path="/Snap" element={<Snap />}/>
+          </Routes>
+        </BackgroundWrapper>
       </BrowserRouter>
     </div>
   );
+
+  function BackgroundWrapper({ children }) {
+    const location = useLocation();
+  
+    const getBackgroundClass = (path) => {
+      if ((path === '/') || (path === '/Preview') || (path === '/Snap')) {
+        return 'bg-original';
+      } 
+      else {
+        return 'bg-wooden-tray-only';
+      }
+    };
+
+    return (
+      <div className={`${getBackgroundClass(location.pathname)} bg-cover bg-no-repeat bg-center min-h-screen`}>
+        {children}
+      </div>
+    );
+  }
 }
 
 export default App;

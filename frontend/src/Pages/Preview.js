@@ -52,7 +52,7 @@ function Preview() {
     }
 
     return (
-        <div className="flex flex-col text-center items-center justify-center bg-original bg-cover bg-center bg-no-repeat h-[calc(100vh-20px)]">
+        <div className="flex flex-col text-center items-center justify-center min-h-screen">
             {loading ? (
                 <div>Loading...</div>
             ) : (

@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
       colors: {
-        customColor: '#1c1c1e',
+        secondaryButtonColor: '#D0C6BD',
+        gridColor: '#4C3228',
       },
       fontFamily: {
         snell: ['"Brush Script MT"', 'Brush Script Std', 'cursive'],
@@ -14,16 +17,23 @@ module.exports = {
       backgroundImage: {
         'original': "url('/src/Images/wooden-tray.jpg')",
         'wooden-tray-only': "url('/src/Images/wooden-tray-only.jpg')",
-        'button': "url('/src/Images/paper.png')",
+        'button': "url('/src/Images/sticker.png')",
+        'notebook': "url('/src/Images/notebook.png')",
+        'paper': "url('/src/Images/paper.png')",
+      },
+      backgroundSize: {
+        '100': '100% 100%',
       },
       height: {
         custom: 'calc(100vh - 20px)'
       },
       boxShadow: {
         custom: '6px 6px 3px 0px rgba(0, 0, 0, 0.5)',
-      }
+        image: '20px 20px 0px 0px rgba(0, 0, 0, 0.5)',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ]
 }
-
