@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Pagination from '../Component/Pagination'
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import './Recipes.css';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Row, Col } from 'react-bootstrap';
 import recipesData from '../JSON/recipeContent.json';
+import cookingTimeIcon from '../Images/cooking-time-icon.png';
+import caloriesIcon from '../Images/calories-icon.png';
 
 function Recipes(ingredients) {  
     const [loading, setLoading] = useState(false);
@@ -84,32 +83,38 @@ function Recipes(ingredients) {
     };
 
     return (
-        <div className="recipes">
+        <div className="flex flex-col text-center items-center justify-center text-white h-full">
             {loading ? (
                 <div>Loading...</div>
             ) : (
                 <div>
-                    <Row>
+                    <div className="flex flex-wrap mx-8">
                         {currentTableData.map((recipe, index) => (
-                            <Col xs={12} sm={6} md={4} lg={4} key={index}>
-                                <button key={index} onClick={(e) => handleClick(e, recipe.id)} className="card-link">
-                                    <Card className="recipe-card">
-                                        <Card.Img className="card-img-top w-100" src={recipe.image} alt="recipe" />
-                                        <Card.Body className="card-body">
-                                            <Card.Text className='card-title'>{recipe.title}</Card.Text>
-                                            <Card.Text>Calories (per serving): {recipe.calories} kcal</Card.Text>
-                                            <Card.Text>Servings: {recipe.servings}</Card.Text>
-                                            <Card.Text>Cooking Time: {recipe.prepTime}</Card.Text>
-                                            <Card.Text>Cuisine Type: {recipe.cuisineType.join(', ')}</Card.Text>
-                                            <Card.Text>Diets: {recipe.diets.join(', ')}</Card.Text>
-                                        </Card.Body>
-                                    </Card>
+                            <div className="w-full sm:w-1/2 md:w-1/3 px-2 mb-4" key={index}>
+                                <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow">
+                                    <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
+                                        <img className="w-full object-cover" src={recipe.image} alt="recipe" />
+                                        <div className="flex flex-col mx-6 my-4 text-black space-y-2">
+                                            <h3 className="text-lg font-bold font-georgia text-black">{recipe.title}</h3>
+                                            <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">
+                                                <div className="flex flex-row items-center space-x-1">
+                                                    <img src={cookingTimeIcon} className="w-8"></img>
+                                                    <p>{recipe.prepTime} minutes</p>
+                                                </div>
+                                                <div className="flex flex-row items-center space-x-1">
+                                                    <img src={caloriesIcon} className="w-8"></img>
+                                                    <p>{recipe.calories} kcal</p>
+                                                </div>
+                                            </div>
+                                            {/* <p className="font-serif text-black text-center">{recipe.diets.join(', ')}</p> */}
+                                        </div>
+                                    </div>
                                 </button>
-                            </Col>
+                            </div>
                         ))}
-                    </Row>
+                    </div>
                     <Pagination
-                      className="pagination-bar"
+                      className="flex justify-center w-full font-serif"
                       currentPage={currentPage}
                       totalCount={recipesData.length}
                       pageSize={pageSize}
