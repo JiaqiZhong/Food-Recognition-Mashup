@@ -3,6 +3,7 @@ import { PrimaryButton } from '../Component/Buttons';
 import ButtonGroup from '../Component/ButtonGroup';
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
+import camera from "../Images/phone-frame.png";
 
 function Snap() {
     const webcamRef = useRef(null);
@@ -57,22 +58,29 @@ function Snap() {
 
     return (
         <div className="flex flex-col text-center items-center justify-center h-screen">
-            {imgSrc ? (
-                <img src={imgSrc} alt="webcam" />
-            ) : (
-                <Webcam height={600} width={600} ref={webcamRef} mirrored={true}/>
-            )}
-            {isStateOne ? ( 
-                <ButtonGroup>
-                    <PrimaryButton onClick={handleCapture}>Snap</PrimaryButton>
-                    <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
-                </ButtonGroup>
-            ) : (
-                <ButtonGroup>
-                    <PrimaryButton onClick={handleRetake}>Retake</PrimaryButton>
-                    <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
-                </ButtonGroup>
-            )}
+            <div className="relative w-frame h-frame">
+                {imgSrc ? (
+                    <img src={imgSrc} className="absolute left-72 top-28 h-60 w-96 object-cover" alt="webcam" />
+                ) : (
+                    <Webcam ref={webcamRef} mirrored={true} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
+                    // <Webcam ref={webcamRef} mirrored={true} className="absolute h-56 w-96 top-24 left-96 right-0 bottom-0 object-cover"/>
+                )}
+                <img src={camera} className="absolute w-camera left-14 top-24"></img>
+                
+                <div className="absolute top-96 left-96 right-96">
+                    {isStateOne ? ( 
+                        <ButtonGroup>
+                            <PrimaryButton onClick={handleCapture}>Snap</PrimaryButton>
+                            <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+                        </ButtonGroup>
+                    ) : (
+                        <ButtonGroup>
+                            <PrimaryButton onClick={handleRetake}>Retake</PrimaryButton>
+                            <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
+                        </ButtonGroup>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

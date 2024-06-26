@@ -20,6 +20,7 @@ module.exports = {
         'button': "url('/src/Images/sticker.png')",
         'notebook': "url('/src/Images/notebook.png')",
         'paper': "url('/src/Images/paper.png')",
+        'camera': "url('/src/Images/phone-frame.png')"
       },
       backgroundSize: {
         '100': '100% 100%',
@@ -31,6 +32,14 @@ module.exports = {
         custom: '6px 6px 3px 0px rgba(0, 0, 0, 0.5)',
         image: '20px 20px 0px 0px rgba(0, 0, 0, 0.5)',
       },
+      width: {
+        'frame': '1000px',
+        'camera': '900px',
+      },
+      height: {
+        'frame': '1000px',
+        'camera': '900px',
+      }
     },
   },
   plugins: [

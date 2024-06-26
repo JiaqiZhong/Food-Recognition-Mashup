@@ -69,6 +69,13 @@ function Recipe() {
                     <div className="flex flex-row bg-notebook bg-100 bg-center bg-no-repeat rounded p-6 space-x-8">
                         <div className="flex-1 flex flex-col space-y-4 m-4">
                             <h1 className="font-georgia font-bold text-xl">{recipeDetails.title}</h1>
+                            <div className="flex flex-wrap text-center items-center space-x-3">
+                                {recipeDetails.diets.map((diet, index) => {
+                                    return (
+                                        <label className="bg-white bg-opacity-75 text-gray-800 rounded font-serif font-bold px-2 py-1" key={index}>{diet}</label>
+                                    )
+                                })}
+                            </div>
                             <div className="font-serif text-lg flex flex-row items-center justify-between">
                                 <div className="flex flex-row items-center space-x-1">
                                     <img src={cookingTimeIcon} className="w-8"></img>
@@ -82,13 +89,6 @@ function Recipe() {
                                     <img src={caloriesIcon} className="w-8"></img>
                                     <p>{recipeDetails.calories} kcal</p>
                                 </div>
-                            </div>
-                            <div className="flex flex-wrap text-center items-center space-x-3">
-                                {recipeDetails.diets.map((diet, index) => {
-                                    return (
-                                        <label className="bg-white bg-opacity-75 text-gray-800 rounded font-serif font-bold px-2 py-1" key={index}>{diet}</label>
-                                    )
-                                })}
                             </div>
                             <div className="flex">
                                 <img className="w-full" src={recipe.image} alt="recipe"></img>
