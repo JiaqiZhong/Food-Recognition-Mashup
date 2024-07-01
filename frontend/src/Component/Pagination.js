@@ -1,7 +1,9 @@
 import React from 'react';
-import classnames from 'classnames';
 import { usePagination, DOTS } from './usePagination';
-import './Pagination.css';
+import classnames from 'classnames';
+import leftArrowIcon from '../Images/left-arrow.png';
+import rightArrowIcon from '../Images/right-arrow.png';
+
 const Pagination = props => {
   const {
     onPageChange,
@@ -33,26 +35,27 @@ const Pagination = props => {
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul
-      className={classnames('pagination-container', { [className]: className })}
-    >
+    <ul className={classnames('flex list-none m-4', { [className]: className })}>
       <li
-        className={classnames('pagination-item', {
-          disabled: currentPage === 1
+        className={classnames('flex items-center justify-center w-8 h-8 mx-1 text-white rounded-full', {
+          'pointer-events-none cursor-default bg-transparent': currentPage === 1,
+          'hover:bg-secondaryButtonColor hover:bg-opacity-50 cursor-pointer': currentPage !== 1
         })}
         onClick={onPrevious}
       >
-        <div className="arrow left" />
+        <img className="w-2" src={leftArrowIcon}></img>
       </li>
       {paginationRange.map(pageNumber => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li className="flex items-center justify-center w-8 h-8 mx-1 text-white rounded-full cursor-default">...</li>;
         }
 
         return (
           <li
-            className={classnames('pagination-item', {
-              selected: pageNumber === currentPage
+            key={pageNumber} // Added key to avoid React warnings
+            className={classnames('flex items-center justify-center w-8 h-8 mx-1 text-white rounded-full', {
+              'bg-secondaryButtonColor': pageNumber === currentPage,
+              'hover:bg-secondaryButtonColor hover:bg-opacity-50 cursor-pointer': pageNumber !== currentPage
             })}
             onClick={() => onPageChange(pageNumber)}
           >
@@ -61,12 +64,13 @@ const Pagination = props => {
         );
       })}
       <li
-        className={classnames('pagination-item', {
-          disabled: currentPage === lastPage
+        className={classnames('flex items-center justify-center w-8 h-8 mx-1 text-white rounded-full', {
+          'pointer-events-none cursor-default bg-transparent': currentPage === lastPage,
+          'hover:bg-secondaryButtonColor hover:bg-opacity-50 cursor-pointer': currentPage !== lastPage
         })}
         onClick={onNext}
       >
-        <div className="arrow right" />
+        <img className="w-2" src={rightArrowIcon}></img>
       </li>
     </ul>
   );
