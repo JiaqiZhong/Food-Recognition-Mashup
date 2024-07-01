@@ -1,8 +1,8 @@
 import React from 'react';
 import { usePagination, DOTS } from './usePagination';
 import classnames from 'classnames';
-import leftArrowIcon from '../Images/left-arrow.png';
-import rightArrowIcon from '../Images/right-arrow.png';
+import leftArrowIcon from '../Icons/left-arrow-icon.png';
+import rightArrowIcon from '../Icons/right-arrow-icon.png';
 
 const Pagination = props => {
   const {

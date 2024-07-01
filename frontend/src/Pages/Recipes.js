@@ -3,8 +3,8 @@ import Pagination from '../Component/Pagination'
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import recipesData from '../JSON/recipeContent.json';
-import cookingTimeIcon from '../Images/cooking-time-icon.png';
-import caloriesIcon from '../Images/calories-icon.png';
+import cookingTimeIcon from '../Icons/cooking-time-icon.png';
+import caloriesIcon from '../Icons/calories-icon.png';
 
 function Recipes(ingredients) {  
     const [loading, setLoading] = useState(false);
@@ -16,8 +16,8 @@ function Recipes(ingredients) {
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * pageSize;
         const lastPageIndex = firstPageIndex + pageSize;
-        return recipesData.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage]);
+        return recipes.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage, recipes]);
 
     //const location = useLocation();
     //const ingredients = location.state.ingredients;
@@ -30,7 +30,7 @@ function Recipes(ingredients) {
         }
         else {
           console.log('component rendered');
-          //getRecipes(`http://localhost:4000/recipes/find-recipes/${ingredients.join()}`);
+          //getRecipes(`http://localhost:4000/recipes/find-recipes/${ingredients.ingredients.join()}`);
         }
     }, []);
 
@@ -78,52 +78,56 @@ function Recipes(ingredients) {
 
     const handleClick = (e, recipeID) => {
         e.preventDefault();
-        const recipeDetails = recipesData.find(recipe => recipe.id === recipeID);
+        const recipeDetails = recipes.find(recipe => recipe.id === recipeID);
         navigate(`/Recipes/${recipeID}`, { state: { recipeDetails: recipeDetails } });
     };
 
     return (
-        <div className="flex flex-col text-center items-center justify-center text-white h-full">
+        <div>
             {loading ? (
-                <div>Loading...</div>
+                <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">Loading predicted results...</div>
             ) : (
-                <div>
-                    <div className="flex flex-wrap mx-6 my-4">
-                        {currentTableData.map((recipe, index) => (
-                            <div className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4" key={index}>
-                                <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow">
-                                    <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
-                                        <img className="w-full object-cover" src={recipe.image} alt="recipe" />
-                                        <div className="flex flex-col mx-6 my-4 text-black space-y-2">
-                                            <h3 className="text-lg font-bold font-georgia text-black">{recipe.title}</h3>
-                                            <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">
-                                                <div className="flex flex-row items-center space-x-1">
-                                                    <img src={cookingTimeIcon} className="w-8"></img>
-                                                    <p>{recipe.prepTime} minutes</p>
-                                                </div>
-                                                <div className="flex flex-row items-center space-x-1">
-                                                    <img src={caloriesIcon} className="w-8"></img>
-                                                    <p>{recipe.calories} kcal</p>
+                <div className="flex flex-col text-center items-center justify-center text-white h-full">
+                        <div>
+                            <div className="flex flex-wrap mx-6 my-4">
+                                {currentTableData.map((recipe, index) => (
+                                    <div className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4" key={index}>
+                                        <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow">
+                                            <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
+                                                <img className="w-full object-cover" src={recipe.image} alt="recipe" />
+                                                <div className="flex flex-col mx-6 my-4 text-black space-y-2">
+                                                    <h3 className="text-lg font-bold font-georgia text-black">{recipe.title}</h3>
+                                                    <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">
+                                                        <div className="flex flex-row items-center space-x-1">
+                                                            <img src={cookingTimeIcon} className="w-8"></img>
+                                                            <p>{recipe.prepTime} minutes</p>
+                                                        </div>
+                                                        <div className="flex flex-row items-center space-x-1">
+                                                            <img src={caloriesIcon} className="w-8"></img>
+                                                            <p>{recipe.calories} kcal</p>
+                                                        </div>
+                                                    </div>
+                                                    {/* <p className="font-serif text-black text-center">{recipe.diets.join(', ')}</p> */}
                                                 </div>
                                             </div>
-                                            {/* <p className="font-serif text-black text-center">{recipe.diets.join(', ')}</p> */}
-                                        </div>
+                                        </button>
                                     </div>
-                                </button>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <Pagination
-                      className="flex justify-center w-full font-serif"
-                      currentPage={currentPage}
-                      totalCount={recipesData.length}
-                      pageSize={pageSize}
-                      onPageChange={page => setCurrentPage(page)}
-                    />
+                            <Pagination
+                            className="flex justify-center w-full font-serif"
+                            currentPage={currentPage}
+                            totalCount={recipes.length}
+                            pageSize={pageSize}
+                            onPageChange={page => setCurrentPage(page)}
+                            />
+                        </div>
+                    
                 </div>
-            )}
-        </div>
+             )}
+            </div>       
     )
+
 }
 
 export default Recipes;

@@ -19,7 +19,6 @@ function Preview() {
         const formData = new FormData();
         formData.append("food_image", imageFile);
         //getPredictions("http://localhost:4000/recognition/upload", formData);
-        //getNutritionFacts("apple");
         navigate(`/Recognition`, { state: { image: imageFile } });
     }
 
@@ -44,7 +43,7 @@ function Preview() {
     function getPredictions(url, option) {
         axios.post(url, option)
         .then(res => {
-            //console.log(res.data);
+            console.log(res.data);
         })
         .catch(err => {
             console.log(err);
