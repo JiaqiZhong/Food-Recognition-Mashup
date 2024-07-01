@@ -11,7 +11,7 @@ function Recipes(ingredients) {
     const [recipes, setRecipes] = useState([]);
     const hasLoadedBefore = useRef(true)
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 9
+    const pageSize = 8
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * pageSize;
@@ -19,7 +19,7 @@ function Recipes(ingredients) {
         return recipesData.slice(firstPageIndex, lastPageIndex);
     }, [currentPage]);
 
-    const location = useLocation();
+    //const location = useLocation();
     //const ingredients = location.state.ingredients;
     const navigate = useNavigate();
 
@@ -88,9 +88,9 @@ function Recipes(ingredients) {
                 <div>Loading...</div>
             ) : (
                 <div>
-                    <div className="flex flex-wrap mx-8">
+                    <div className="flex flex-wrap mx-6 my-4">
                         {currentTableData.map((recipe, index) => (
-                            <div className="w-full sm:w-1/2 md:w-1/3 px-2 mb-4" key={index}>
+                            <div className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4" key={index}>
                                 <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow">
                                     <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
                                         <img className="w-full object-cover" src={recipe.image} alt="recipe" />

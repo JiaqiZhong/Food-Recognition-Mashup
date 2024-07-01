@@ -20,7 +20,8 @@ module.exports = {
         'button': "url('/src/Images/sticker.png')",
         'notebook': "url('/src/Images/notebook.png')",
         'paper': "url('/src/Images/paper.png')",
-        'camera': "url('/src/Images/phone-frame.png')"
+        'camera': "url('/src/Images/phone-frame.png')",
+        'sticker': "url('/src/Images/sticky-note.png')",
       },
       backgroundSize: {
         '100': '100% 100%',
