@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import data from '../JSON/predictionsWithNutritionFacts';
-import cookingTimeIcon from '../Images/cooking-time-icon.png';
-import caloriesIcon from '../Images/calories-icon.png';
-import servingSizeIcon from '../Images/serving-size-icon.png';
+import cookingTimeIcon from '../Icons/cooking-time-icon.png';
+import caloriesIcon from '../Icons/calories-icon.png';
+import servingSizeIcon from '../Icons/serving-size-icon.png';
 
 function Recipe() {
     //const { recipeID } = useParams();  
