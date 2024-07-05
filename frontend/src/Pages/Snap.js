@@ -11,7 +11,7 @@ function Snap() {
     const [isStateOne, setIsStateOne] = useState(true);
     const navigate = useNavigate();
 
-    // create a capture function
+    // Create a capture function
     const handleCapture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         console.log(imageSrc);
@@ -19,11 +19,13 @@ function Snap() {
         setIsStateOne(false);
     }, [webcamRef]);
 
+    // Back to the landing page
     const handleCancel = (e) => {
         e.preventDefault();
         navigate('/');
     }
 
+    // Navigate to the food recognition page
     const handleConfirm = (e) => {
         e.preventDefault();
         dataUrlToFile(imgSrc)
@@ -32,7 +34,7 @@ function Snap() {
             if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    //navigate(`/Preview?image=${encodeURIComponent(reader.result)}`);
+                    // Pass the snapped photo to the food recognition page
                     navigate(`/Recognition`, { state: { image: file } });
                 }
                 reader.readAsDataURL(file);
@@ -40,12 +42,14 @@ function Snap() {
         });
     }
 
+    // Retake photo
     const handleRetake = (e) => {
         e.preventDefault();
         setIsStateOne(true);
         setImgSrc(null);
     }
 
+    // Convert the image to image file
     function dataUrlToFile(dataUrl) {
         let file = (fetch(dataUrl)
             .then(res => res.blob())
@@ -60,13 +64,15 @@ function Snap() {
         <div className="flex flex-col text-center items-center justify-center h-screen">
             <div className="relative w-frame h-frame">
                 {imgSrc ? (
-                    <img src={imgSrc} className="absolute left-72 top-28 h-60 w-96 object-cover" alt="webcam" />
+                    // Display the captured image
+                    <img src={imgSrc} className="absolute left-72 top-28 h-60 w-96 object-cover" alt="captured image" />
                 ) : (
-                    <Webcam ref={webcamRef} mirrored={true} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
-                    // <Webcam ref={webcamRef} mirrored={true} className="absolute h-56 w-96 top-24 left-96 right-0 bottom-0 object-cover"/>
+                    // Display the webcam and a fake phone frame
+                    <div>
+                        <Webcam ref={webcamRef} mirrored={true} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
+                        <img src={camera} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
+                    </div>
                 )}
-                <img src={camera} className="absolute w-camera left-14 top-24"></img>
-                
                 <div className="absolute top-96 left-96 right-96">
                     {isStateOne ? ( 
                         <ButtonGroup>

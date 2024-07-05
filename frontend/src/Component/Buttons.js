@@ -3,7 +3,7 @@ import React from 'react';
 const PrimaryButton = ({ children, onClick }) => {
   return (
     <button
-      className="bg-white font-bold text-lg text-gray-800 font-georgia py-2 px-4 rounded w-full shadow-custom"
+      className="bg-white font-bold text-lg text-gray-800 font-georgia py-2 px-4 rounded w-full shadow-custom transition-transform transform hover:scale-105"
       onClick={onClick}
     >
       {children}

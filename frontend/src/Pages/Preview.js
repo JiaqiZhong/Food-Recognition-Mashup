@@ -1,76 +1,38 @@
 import React, {useState} from "react";
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Preview.css';
 import ButtonGroup from '../Component/ButtonGroup';
 import { PrimaryButton } from '../Component/Buttons';
 
 function Preview() {
     const location = useLocation();
-    //const searchParams = new URLSearchParams(location.search);
-    //const image = searchParams.get('image');
     const navigate = useNavigate();
     const imageFile = location.state.image;
-    const [loading, setLoading] = useState(false);
-    const [nutritionFacts, setNutritionFacts] = useState([]);
 
+    // Back to the landing page
+    const handleCancel = (e) => {
+        e.preventDefault();
+        navigate("/");
+    }    
+    
+    // Navigate to the food recognition page
     const handleConfirm = (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("food_image", imageFile);
-        //getPredictions("http://localhost:4000/recognition/upload", formData);
+        // Pass the image data to the food recognition page
         navigate(`/Recognition`, { state: { image: imageFile } });
     }
 
-    const handleCancel = (e) => {
-        e.preventDefault();
-        navigate("/");
-    }
-
-    function getNutritionFacts(ingredient) {
-        axios.get(`http://localhost:4000/nutrition-facts/${ingredient}`)
-        .then((res) => {
-            console.log(res.data);
-            setNutritionFacts(res.data);
-            setLoading(false);
-        })
-        .catch(err => {
-            console.log(err);
-            setLoading(false);
-        })
-    }
-
-    function getPredictions(url, option) {
-        axios.post(url, option)
-        .then(res => {
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    }
-
     return (
-        <div className="flex flex-col text-center items-center justify-center min-h-screen">
-            {loading ? (
-                <div>Loading...</div>
-            ) : (
-                <div className="m-4">
-                    {imageFile && <img className="w-80 shadow-custom" src={URL.createObjectURL(imageFile)} alt="uploaded" />}
-                    <ButtonGroup>
-                        <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
-                        <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
-                        {/* {nutritionFacts && (
-                            <ul>
-                                <li>Energy: {nutritionFacts.energy.quantity}</li>
-                                <li>Protein: {nutritionFacts.protein.quantity}</li>
-                                <li>Fat: {nutritionFacts.fat.quantity}</li>
-                                <li>Carbohydrates: {nutritionFacts.c.quantity}</li>
-                            </ul>
-                        )} */}
-                    </ButtonGroup>
-                </div>
-            )}
+        <div className="flex text-center items-center justify-center min-h-screen">
+            <div className="md:mb-8">
+                {imageFile && <img className="w-80 shadow-custom" src={URL.createObjectURL(imageFile)} alt="uploaded image" />}
+                <ButtonGroup>
+                    <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+                    <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
+                </ButtonGroup>
+            </div>
         </div>
     );
 }
