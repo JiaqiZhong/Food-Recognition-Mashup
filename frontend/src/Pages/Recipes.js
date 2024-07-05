@@ -2,27 +2,27 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Pagination from '../Component/Pagination'
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import recipesData from '../JSON/recipeContent.json';
+import recipes from '../JSON/recipeContent.json';
 import cookingTimeIcon from '../Icons/cooking-time-icon.png';
 import caloriesIcon from '../Icons/calories-icon.png';
 
 function Recipes(ingredients) {  
+    //const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [recipes, setRecipes] = useState([]);
-    const hasLoadedBefore = useRef(true)
+    const [errorMessage, setErrorMessage] = useState("");
+    const hasLoadedBefore = useRef(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 8
+    const pageSize = 8;
+    const navigate = useNavigate();
 
-    const currentTableData = useMemo(() => {
+    // Recipes on the current page
+    const currentRecipeData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * pageSize;
         const lastPageIndex = firstPageIndex + pageSize;
         return recipes.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, recipes]);
 
-    //const location = useLocation();
-    //const ingredients = location.state.ingredients;
-    const navigate = useNavigate();
-
+    // Get recipes of the selected ingredients
     useEffect(() => {
         if(hasLoadedBefore.current) {
           console.log("Effect ran")
@@ -57,25 +57,31 @@ function Recipes(ingredients) {
                     recipe.sourceUrl = res.data.sourceUrl;
                 } catch (err) {
                     console.log(err);
+                    setLoading(false);
+                    setErrorMessage("Something went wrong, please try again later.");
                 }                  
             });
             Promise.all(promises)
             .then(() => {
               console.log(recipes);
-              setRecipes(recipes);
+              //setRecipes(recipes);
               setLoading(false);
+              setErrorMessage("Something went wrong, please try again later.");
             })
             .catch(err => {
               console.log(err);
               setLoading(false);
+              setErrorMessage("Something went wrong, please try again later.");
           });
         })
         .catch((error) => {
             console.log(error);
             setLoading(false);
+            setErrorMessage("Something went wrong, please try again later.");
         })
     }
 
+    // Navigate to the recipe details page of the clicked recipe
     const handleClick = (e, recipeID) => {
         e.preventDefault();
         const recipeDetails = recipes.find(recipe => recipe.id === recipeID);
@@ -86,13 +92,17 @@ function Recipes(ingredients) {
         <div>
             {loading ? (
                 <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">Loading predicted results...</div>
-            ) : (
-                <div className="flex flex-col text-center items-center justify-center text-white h-full">
+            ) : ( 
+                errorMessage ? (
+                    <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">{errorMessage}</div>
+                ) : (
+                    <div className="flex flex-col text-center items-center justify-center text-white h-full">
                         <div>
                             <div className="flex flex-wrap mx-6 my-4">
-                                {currentTableData.map((recipe, index) => (
+                                {currentRecipeData.map((recipe, index) => (
                                     <div className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4" key={index}>
-                                        <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow">
+                                        {/* Recipe cards */}
+                                        <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow transition-transform transform hover:scale-105">
                                             <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
                                                 <img className="w-full object-cover" src={recipe.image} alt="recipe" />
                                                 <div className="flex flex-col mx-6 my-4 text-black space-y-2">
@@ -107,7 +117,6 @@ function Recipes(ingredients) {
                                                             <p>{recipe.calories} kcal</p>
                                                         </div>
                                                     </div>
-                                                    {/* <p className="font-serif text-black text-center">{recipe.diets.join(', ')}</p> */}
                                                 </div>
                                             </div>
                                         </button>
@@ -115,19 +124,18 @@ function Recipes(ingredients) {
                                 ))}
                             </div>
                             <Pagination
-                            className="flex justify-center w-full font-serif"
-                            currentPage={currentPage}
-                            totalCount={recipes.length}
-                            pageSize={pageSize}
-                            onPageChange={page => setCurrentPage(page)}
+                                className="flex justify-center w-full font-serif"
+                                currentPage={currentPage}
+                                totalCount={recipes.length}
+                                pageSize={pageSize}
+                                onPageChange={page => setCurrentPage(page)}
                             />
                         </div>
-                    
-                </div>
-             )}
-            </div>       
+                    </div>
+                )
+            )}
+        </div>         
     )
-
 }
 
 export default Recipes;

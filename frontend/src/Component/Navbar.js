@@ -11,13 +11,13 @@ function Navbar() {
   }
 
   return (
-    <nav className="flex flex-col sm:flex-row bg-white sm:h-14 p-4 bg-opacity-75 items-center justify-between">
+    <nav className="flex flex-col sm:flex-row bg-white sm:h-14 px-6 py-4 bg-opacity-75 items-center justify-between">
         <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto">
           <div className="flex flex-row w-full sm:w-auto justify-between">
             <button className="sm:hidden " onClick={toggleMenu}>
               <img className="w-8" src={menuIcon}></img>
             </button>
-            <img src={appLogo} className="w-14 h-full"></img>        
+            <img src={appLogo} className="w-14 h-full sm:mr-8"></img>    
             <a href="/" className="w-8 sm:hidden">
               <img src={profileIcon}></img>
             </a>
