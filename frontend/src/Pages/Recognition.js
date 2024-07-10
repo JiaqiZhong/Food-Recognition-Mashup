@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, memo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import data from '../JSON/predictionsWithNutritionFacts';
@@ -14,27 +14,35 @@ function Recognition() {
   const [manuallyEnteredIngredients, setManuallyEnteredIngredients] = useState('');
   const [isSearchRecipes, setIsSearchRecipes] = useState(false);
   const checkBoxRef = useRef({});
-  const hasLoadedBefore = useRef(true);
   const navigate = useNavigate();
   const location = useLocation();
   const imageFile = location.state.image;
+  const base64 = location.state.base64;
 
-  // Get predicted results from the given image
+  //Get predicted results from the given image
   useEffect(() => {
-    if(hasLoadedBefore.current) {
-      console.log("Effect ran")
-      hasLoadedBefore.current = false;
-    }
-    else {
-      console.log('component rendered');
-      const formData = new FormData();
-      formData.append("food_image", imageFile);
-      //getPredictions("http://localhost:4000/recognition/upload", formData);
-    }
-  }, []);
+    const storedImage = localStorage.getItem('storedImage');
+    const newImage = localStorage.getItem('newImage');
+    const storedData = localStorage.getItem('result');
 
-  function getPredictions(url, option) {
-    axios.post(url, option)
+    if (storedImage === null) {
+      console.log("First time uploading an image, fetch new data")
+      getPredictions("http://localhost:4000/recognition/upload", imageFile);
+    }
+    else if (storedData && storedImage === newImage) {
+      console.log("Same image, using cached data");
+      setPredictedResults(JSON.parse(storedData)); 
+    } 
+    else {
+      console.log("Different image, fetch new data");
+      getPredictions("http://localhost:4000/recognition/upload", imageFile);
+    }
+  }, [imageFile]);
+
+  function getPredictions(url, image) {
+    const formData = new FormData();
+    formData.append("food_image", image);
+    axios.post(url, formData)
     .then((res) => {
         let results = res.data.results;
         const promises = results.map(async (result) => {
@@ -53,6 +61,8 @@ function Recognition() {
             console.log(results);
             setPredictedResults(results);
             setLoading(false);
+            localStorage.setItem('result', JSON.stringify(results));
+            localStorage.setItem('storedImage', base64);
           })
           .catch(err => {
             console.log(err);
@@ -102,8 +112,8 @@ function Recognition() {
   const handleSearch = (e) => {
     e.preventDefault();
     console.log(selectedIngredients);
-    //navigate(`/Recipes`, { state: { ingredients: selectedIngredients } });
-    setIsSearchRecipes(true);
+    navigate(`/Recipes`, { state: { ingredients: selectedIngredients } });
+    //setIsSearchRecipes(true);
   }
 
   const handleNutritionFacts = (e) => {
@@ -194,25 +204,22 @@ function Recognition() {
                               <th class="whitespace-pre-line">Fat (kcal)</th>
                               <th class="whitespace-pre-line">Carbohydrates (kcal)</th>
                             </tr>
-                          </thead>
-                          {//predictedResults && (
-                            <tbody>
-                              {data.map((result) => (
-                                <tr key={result.name}>
-                                  <td className="border-b border-gridColor border-opacity-50"><input id="checkbox" value={result.name} type="checkbox" 
-                                  ref={(ref) => (checkBoxRef.current[result.name] = ref)}
-                                  onChange={handleCheckboxChange}/></td>
-                                  <td className="border-b border-gridColor border-opacity-50">{result.name}</td>
-                                  <td className="border-b border-gridColor border-opacity-50">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
-                                  <td className="border-b border-gridColor border-opacity-50">{result.energy}</td>
-                                  <td className="border-b border-gridColor border-opacity-50">{result.protein}</td>
-                                  <td className="border-b border-gridColor border-opacity-50">{result.fat}</td>
-                                  <td className="border-b border-gridColor border-opacity-50">{result.carb}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          //)
-                        }
+                          </thead>         
+                          <tbody>
+                            {predictedResults.map((result) => (
+                              <tr key={result.name}>
+                                <td className="border-b border-gridColor border-opacity-50"><input id="checkbox" value={result.name} type="checkbox" 
+                                ref={(ref) => (checkBoxRef.current[result.name] = ref)}
+                                onChange={handleCheckboxChange}/></td>
+                                <td className="border-b border-gridColor border-opacity-50">{result.name}</td>
+                                <td className="border-b border-gridColor border-opacity-50">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
+                                <td className="border-b border-gridColor border-opacity-50">{result.energy}</td>
+                                <td className="border-b border-gridColor border-opacity-50">{result.protein}</td>
+                                <td className="border-b border-gridColor border-opacity-50">{result.fat}</td>
+                                <td className="border-b border-gridColor border-opacity-50">{result.carb}</td>
+                              </tr>
+                            ))}
+                          </tbody>
                       </table>
                     </div>
                   </div>

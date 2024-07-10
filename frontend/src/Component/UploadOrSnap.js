@@ -16,7 +16,9 @@ function UploadOrSnap() {
           const reader = new FileReader();
           reader.onloadend = () => {
               //navigate(`/Preview?image=${encodeURIComponent(reader.result)}`);
-              navigate(`/Preview`, { state: { image: inputImage } });
+              const base64String = reader.result;
+              navigate(`/Preview`, { state: { image: inputImage, base64: base64String } });
+              localStorage.setItem('newImage', base64String);
           }
           reader.readAsDataURL(inputImage);
       }
