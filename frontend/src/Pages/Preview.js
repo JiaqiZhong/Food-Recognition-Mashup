@@ -8,6 +8,7 @@ function Preview() {
     const location = useLocation();
     const navigate = useNavigate();
     const imageFile = location.state.image;
+    const base64 = location.state.base64;
 
     // Back to the landing page
     const handleCancel = (e) => {
@@ -21,7 +22,7 @@ function Preview() {
         const formData = new FormData();
         formData.append("food_image", imageFile);
         // Pass the image data to the food recognition page
-        navigate(`/Recognition`, { state: { image: imageFile } });
+        navigate(`/Recognition`, { state: { image: imageFile, base64: base64 } });
     }
 
     return (
