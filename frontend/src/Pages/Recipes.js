@@ -5,6 +5,7 @@ import axios from 'axios';
 import recipes from '../JSON/recipeContent.json';
 import cookingTimeIcon from '../Icons/cooking-time-icon.png';
 import caloriesIcon from '../Icons/calories-icon.png';
+import SwitchBar from '../Component/SwitchBar';
 
 function Recipes(ingredients) {  
     //const [recipes, setRecipes] = useState([]);
@@ -14,6 +15,8 @@ function Recipes(ingredients) {
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 8;
     const navigate = useNavigate();
+    const [selectedIngredients, setSelectedIngredients] = useState([]);
+    const [manuallyEnteredIngredients, setManuallyEnteredIngredients] = useState('');
 
     // Recipes on the current page
     const currentRecipeData = useMemo(() => {
@@ -88,6 +91,27 @@ function Recipes(ingredients) {
         navigate(`/Recipes/${recipeID}`, { state: { recipeDetails: recipeDetails } });
     };
 
+    // Get a manually entered ingredient
+  const handleTextAreaChange = (e) => {
+    setManuallyEnteredIngredients(e.target.value);
+  }
+
+  // Add the manually entered ingredients to selected ingredients
+  const handleAddIngredient = (e) => {
+    e.preventDefault();
+    if (manuallyEnteredIngredients !== '') {
+      setSelectedIngredients([...selectedIngredients, manuallyEnteredIngredients]);
+    }
+      // Empty the textarea
+    setManuallyEnteredIngredients('');
+  }
+
+    // Delete a selected ingredient
+    const handleDeleteIngredient = (e, ingredient) => {
+        e.preventDefault();
+        setSelectedIngredients(selectedIngredients.filter(selectedIngredient => selectedIngredient !== ingredient));
+    }
+
     return (
         <div>
             {loading ? (
@@ -97,6 +121,13 @@ function Recipes(ingredients) {
                     <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">{errorMessage}</div>
                 ) : (
                     <div className="flex flex-col text-center items-center justify-center text-white h-full">
+                        <SwitchBar 
+                            selectedIngredients={selectedIngredients}
+                            manuallyEnteredIngredients={manuallyEnteredIngredients}
+                            handleTextAreaChange={handleTextAreaChange}
+                            handleAddIngredient={handleAddIngredient}
+                            handleDeleteIngredient={handleDeleteIngredient}
+                        />
                         <div>
                             <div className="flex flex-wrap mx-6 my-4">
                                 {currentRecipeData.map((recipe, index) => (
