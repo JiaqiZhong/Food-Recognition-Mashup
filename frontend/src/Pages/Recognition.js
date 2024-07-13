@@ -5,6 +5,7 @@ import data from '../JSON/predictionsWithNutritionFacts';
 import UploadOrSnap from '../Component/UploadOrSnap';
 import Recipes from './Recipes';
 import { SecondaryButton } from '../Component/Buttons';
+import SwitchBar from '../Component/SwitchBar';
 
 function Recognition() {
   const [loading, setLoading] = useState(false);
@@ -84,12 +85,14 @@ function Recognition() {
     
     // Case 1: The user checks the box
     if (checked) {
-      setSelectedIngredients(prevIngredients => [...prevIngredients, value])
+      const curIngredients = (prevIngredients) => [...prevIngredients, value];
+      setSelectedIngredients(curIngredients);
     }
 
     // Case 2: The user unchecks the box
     else {
-      setSelectedIngredients(prevIngredients => prevIngredients.filter(ingredient => ingredient !== value))
+      const curIngredients = (prevIngredients) => prevIngredients.filter(ingredient => ingredient !== value)
+      setSelectedIngredients(curIngredients);
     };
   };
 
@@ -140,48 +143,13 @@ function Recognition() {
           <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">{errorMessage}</div>
         ) : (
           <div className="flex flex-col text-center items-center justify-center text-white p-6 space-y-2">
-              {/* Switch buttons for "Nutrition Facts" and "Find Recipes"*/}
-              <div className="flex flex-row items-center justify-center border border-secondaryButtonColor rounded p-1 mx-4 w-full sm:w-2/3">
-                <SecondaryButton onClick={handleNutritionFacts} isActive={!isSearchRecipes}>Nutrition Facts</SecondaryButton>
-                <SecondaryButton onClick={handleSearch} isActive={isSearchRecipes}>Find Recipes</SecondaryButton>
-              </div>
-              {/* Display nutrition facts */}
-              
-                <div className="flex flex-col text-center items-center justify-center w-full space-y-2">
-                  <p className="font-serif text-xl">Which one did I guess right? Select them to find your favourite recipes!</p>
-                  {/* Manually add ingredients */}
-                  <div className="space-x-3">
-                    <input className="bg-transparent rounded h-8 border border-white w-80 font-serif text-lg p-1" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more ingredients here, one at a time" onChange={handleTextAreaChange}></input>
-                    <button className="bg-white text-gray-800 font-georgia font-bold px-2 h-8 rounded shadow-custom transition-transform transform hover:scale-105" onClick={handleAddIngredient}>Add</button>
-                  </div>
-                  {/* Display each manually added ingredient on a sticky note*/}
-                  <div className="flex flex-wrap text-center items-center justify-center">
-                    {selectedIngredients.map((selectedIngredient, index) => {
-                      return (
-                        <button className="bg-button bg-contain bg-center bg-no-repeat text-gray-800 font-georgia font-bold p-6 hover:bg-sticker" key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>
-                          {
-                            selectedIngredient.includes(" ") ?
-                              // Split by spaces if there are spaces in selectedIngredient
-                              selectedIngredient.split(" ").map((word, idx) => (
-                                <div key={idx}>
-                                  {word}
-                                  <br />
-                                </div>
-                              ))
-                            :
-                              // Split into chunks of up to 9 characters if the word is too long and there is no space
-                              selectedIngredient.match(/.{1,9}/g).map((chunk, idx) => (
-                                <div key={idx}>
-                                  {chunk}
-                                  <br />
-                                </div>
-                              ))
-                          }
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+              <SwitchBar         
+                manuallyEnteredIngredients={manuallyEnteredIngredients}
+                handleTextAreaChange={handleTextAreaChange}
+                handleAddIngredient={handleAddIngredient}
+                selectedIngredients={selectedIngredients}
+                handleDeleteIngredient={handleDeleteIngredient} 
+              />
                 {!isSearchRecipes ? (
                   <div className="flex flex-col md:flex-row md:space-x-4">
                     {/* Display the uploaded image */}
