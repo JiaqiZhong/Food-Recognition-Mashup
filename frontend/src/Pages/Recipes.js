@@ -6,16 +6,21 @@ import recipes from '../JSON/recipeContent.json';
 import cookingTimeIcon from '../Icons/cooking-time-icon.png';
 import caloriesIcon from '../Icons/calories-icon.png';
 import SwitchBar from '../Component/SwitchBar';
+import recipePlaceholderImage from '../Images/recipe-placeholder-image.png';
 
-function Recipes(ingredients) {  
-    //const [recipes, setRecipes] = useState([]);
-    const [loading, setLoading] = useState(false);
+function Recipes() {  
+    const [recipes, setRecipes] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const hasLoadedBefore = useRef(true);
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 8;
     const navigate = useNavigate();
-    const [selectedIngredients, setSelectedIngredients] = useState([]);
+    const [selectedIngredients, setSelectedIngredients] = useState(() => {
+        // Initialize state from localStorage
+        const storedSelectedIngredients = localStorage.getItem('selectedIngredients');
+        return storedSelectedIngredients ? JSON.parse(storedSelectedIngredients) : [];
+    });
     const [manuallyEnteredIngredients, setManuallyEnteredIngredients] = useState('');
 
     // Recipes on the current page
@@ -25,20 +30,31 @@ function Recipes(ingredients) {
         return recipes.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, recipes]);
 
-    // Get recipes of the selected ingredients
     useEffect(() => {
-        if(hasLoadedBefore.current) {
-          console.log("Effect ran")
-          hasLoadedBefore.current = false;
+        const storedSelectedIngredients = localStorage.getItem('storedSelectedIngredients');
+        const storedRecipes = localStorage.getItem('recipes');
+        console.log(storedSelectedIngredients);
+        console.log(JSON.stringify(selectedIngredients));
+
+        if (selectedIngredients.length === 0) {
+            console.log("Ingredient(s) required")
+            setLoading(false);
+            setErrorMessage("Please select at least one ingredient");
+        }
+        else if (storedRecipes && storedSelectedIngredients === JSON.stringify(selectedIngredients)) {
+            console.log("Same ingredients, using cached data")
+            setRecipes(JSON.parse(storedRecipes));
+            setLoading(false);
         }
         else {
-          console.log('component rendered');
-          //getRecipes(`http://localhost:4000/recipes/find-recipes/${ingredients.ingredients.join()}`);
+            console.log("Modified ingredients, fetch new data")
+            getRecipes('http://localhost:4000/recipes/find-recipes/', selectedIngredients)
+            localStorage.setItem('selectedIngredients', JSON.stringify(selectedIngredients))
         }
-    }, []);
+    }, [selectedIngredients]);
 
-    function getRecipes(url) {
-        axios.get(url)
+    function getRecipes(url, ingredients) {
+        axios.get(url + ingredients.join())
         .then((res) => {
             let recipes = res.data.map(({ id, title, image }) => ({ id, title, image }))
             const promises = recipes.map(async (recipe) => {
@@ -67,9 +83,10 @@ function Recipes(ingredients) {
             Promise.all(promises)
             .then(() => {
               console.log(recipes);
-              //setRecipes(recipes);
+              setRecipes(recipes);
               setLoading(false);
-              setErrorMessage("Something went wrong, please try again later.");
+              localStorage.setItem('recipes', JSON.stringify(recipes));
+              localStorage.setItem('storedSelectedIngredients', JSON.stringify(ingredients))
             })
             .catch(err => {
               console.log(err);
@@ -114,28 +131,28 @@ function Recipes(ingredients) {
 
     return (
         <div>
+            <SwitchBar 
+                    selectedIngredients={selectedIngredients}
+                    manuallyEnteredIngredients={manuallyEnteredIngredients}
+                    handleTextAreaChange={handleTextAreaChange}
+                    handleAddIngredient={handleAddIngredient}
+                    handleDeleteIngredient={handleDeleteIngredient}
+                />
             {loading ? (
                 <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">Loading predicted results...</div>
             ) : ( 
                 errorMessage ? (
-                    <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">{errorMessage}</div>
+                    <div className="flex flex-col text-white justify-center items-center font-serif text-xl">{errorMessage}</div>
                 ) : (
                     <div className="flex flex-col text-center items-center justify-center text-white h-full">
-                        <SwitchBar 
-                            selectedIngredients={selectedIngredients}
-                            manuallyEnteredIngredients={manuallyEnteredIngredients}
-                            handleTextAreaChange={handleTextAreaChange}
-                            handleAddIngredient={handleAddIngredient}
-                            handleDeleteIngredient={handleDeleteIngredient}
-                        />
                         <div>
-                            <div className="flex flex-wrap mx-6 my-4">
+                            <div className="flex flex-wrap mx-6 my-4 justify-center">
                                 {currentRecipeData.map((recipe, index) => (
                                     <div className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4" key={index}>
                                         {/* Recipe cards */}
                                         <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow transition-transform transform hover:scale-105">
                                             <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
-                                                <img className="w-full object-cover" src={recipe.image} alt="recipe" />
+                                                <img className="w-full object-cover" src={`https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = recipePlaceholderImage;}}/>
                                                 <div className="flex flex-col mx-6 my-4 text-black space-y-2">
                                                     <h3 className="text-lg font-bold font-georgia text-black">{recipe.title}</h3>
                                                     <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">

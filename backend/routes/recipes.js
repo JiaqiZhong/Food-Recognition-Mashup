@@ -40,7 +40,7 @@ function createFindRecipeByIngredientsOptions(ingredients) {
         parameters: 
             '?apiKey=' + process.env.SPOONACULAR_KEY +
             '&ingredients=' + ingredients +
-            '&number=16'
+            '&number=6'
     }
     return options;
 }
