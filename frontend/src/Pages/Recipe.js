@@ -5,6 +5,7 @@ import data from '../JSON/predictionsWithNutritionFacts';
 import cookingTimeIcon from '../Icons/cooking-time-icon.png';
 import caloriesIcon from '../Icons/calories-icon.png';
 import servingSizeIcon from '../Icons/serving-size-icon.png';
+import recipePlaceholderImage from '../Images/recipe-placeholder-image.png';
 
 function Recipe() {
     //const { recipeID } = useParams();  
@@ -69,10 +70,10 @@ function Recipe() {
                     <div className="flex flex-row bg-notebook bg-100 bg-center bg-no-repeat rounded p-6 space-x-8">
                         <div className="flex-1 flex flex-col space-y-4 m-4">
                             <h1 className="font-georgia font-bold text-xl">{recipeDetails.title}</h1>
-                            <div className="flex flex-wrap text-center items-center space-x-3">
+                            <div className="flex flex-wrap text-center items-center">
                                 {recipeDetails.diets.map((diet, index) => {
                                     return (
-                                        <label className="bg-white bg-opacity-75 text-gray-800 rounded font-serif font-bold px-2 py-1" key={index}>{diet}</label>
+                                        <label className="bg-white bg-opacity-75 text-gray-800 rounded font-serif font-bold px-2 py-1 m-1" key={index}>{diet}</label>
                                     )
                                 })}
                             </div>
@@ -91,7 +92,7 @@ function Recipe() {
                                 </div>
                             </div>
                             <div className="flex">
-                                <img className="w-full" src={recipe.image} alt="recipe"></img>
+                                <img className="w-full" src={`https://img.spoonacular.com/recipes/${recipeDetails.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = recipePlaceholderImage;}}></img>
                             </div>
                         </div>
                         <div className="flex-1 flex flex-col space-y-6 m-4 pt-2 pr-8">

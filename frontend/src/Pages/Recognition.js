@@ -8,19 +8,38 @@ import { SecondaryButton } from '../Component/Buttons';
 import SwitchBar from '../Component/SwitchBar';
 
 function Recognition() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [predictedResults, setPredictedResults] = useState([]);
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState(() => {
+    // Initialize state from localStorage
+    const storedSelectedIngredients = localStorage.getItem('selectedIngredients');
+    return storedSelectedIngredients ? JSON.parse(storedSelectedIngredients) : [];
+  });
   const [manuallyEnteredIngredients, setManuallyEnteredIngredients] = useState('');
   const [isSearchRecipes, setIsSearchRecipes] = useState(false);
   const checkBoxRef = useRef({});
   const navigate = useNavigate();
   const location = useLocation();
-  const imageFile = location.state.image;
-  const base64 = location.state.base64;
+  const imageFile = location.state?.image;
+  const base64 = location.state?.base64;
+  const [image, setImage] = useState(null);
+  
+  useEffect(() => {
+    localStorage.setItem('selectedIngredients', JSON.stringify(selectedIngredients));
+    console.log(selectedIngredients);
+  }, [selectedIngredients]);
 
-  //Get predicted results from the given image
+  // Set the initial state of the checkboxes based on selectedIngredients
+  useEffect(() => {
+    predictedResults.forEach(result => {
+      if (selectedIngredients.includes(result.name) && checkBoxRef.current[result.name]) {
+        checkBoxRef.current[result.name].checked = true;
+      }
+    });
+  }, [predictedResults, selectedIngredients]);
+
+  // Get predicted results from the given image
   useEffect(() => {
     const storedImage = localStorage.getItem('storedImage');
     const newImage = localStorage.getItem('newImage');
@@ -29,14 +48,18 @@ function Recognition() {
     if (storedImage === null) {
       console.log("First time uploading an image, fetch new data")
       getPredictions("http://localhost:4000/recognition/upload", imageFile);
+      setImage(newImage);
     }
     else if (storedData && storedImage === newImage) {
       console.log("Same image, using cached data");
-      setPredictedResults(JSON.parse(storedData)); 
+      setPredictedResults(JSON.parse(storedData));
+      setImage(storedImage);
+      setLoading(false);
     } 
     else {
       console.log("Different image, fetch new data");
       getPredictions("http://localhost:4000/recognition/upload", imageFile);
+      setImage(newImage);
     }
   }, [imageFile]);
 
@@ -61,6 +84,7 @@ function Recognition() {
           .then(() => {
             console.log(results);
             setPredictedResults(results);
+            setImage(base64);
             setLoading(false);
             localStorage.setItem('result', JSON.stringify(results));
             localStorage.setItem('storedImage', base64);
@@ -85,14 +109,20 @@ function Recognition() {
     
     // Case 1: The user checks the box
     if (checked) {
-      const curIngredients = (prevIngredients) => [...prevIngredients, value];
-      setSelectedIngredients(curIngredients);
+      setSelectedIngredients(prevIngredients => {
+        const updatedIngredients = [...prevIngredients, value];
+        localStorage.setItem('selectedIngredients', JSON.stringify(updatedIngredients));
+        return updatedIngredients;
+      });
     }
 
     // Case 2: The user unchecks the box
     else {
-      const curIngredients = (prevIngredients) => prevIngredients.filter(ingredient => ingredient !== value)
-      setSelectedIngredients(curIngredients);
+      setSelectedIngredients(prevIngredients => {
+        const updatedIngredients = prevIngredients.filter(ingredient => ingredient !== value);
+        localStorage.setItem('selectedIngredients', JSON.stringify(updatedIngredients));
+        return updatedIngredients;
+      });
     };
   };
 
@@ -105,29 +135,24 @@ function Recognition() {
   const handleAddIngredient = (e) => {
     e.preventDefault();
     if (manuallyEnteredIngredients !== '') {
-      setSelectedIngredients([...selectedIngredients, manuallyEnteredIngredients]);
+      setSelectedIngredients(prevIngredients => {
+        const updatedIngredients = [...prevIngredients, manuallyEnteredIngredients];
+        localStorage.setItem('selectedIngredients', JSON.stringify(updatedIngredients));
+        return updatedIngredients;
+      });
     }
-      // Empty the textarea
+    // Empty the textarea
     setManuallyEnteredIngredients('');
-  }
-
-  // Search for recipes based on the selected ingredients
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log(selectedIngredients);
-    navigate(`/Recipes`, { state: { ingredients: selectedIngredients } });
-    //setIsSearchRecipes(true);
-  }
-
-  const handleNutritionFacts = (e) => {
-    e.preventDefault();
-    setIsSearchRecipes(false);
   }
 
   // Delete a selected ingredient
   const handleDeleteIngredient = (e, ingredient) => {
     e.preventDefault();
-    setSelectedIngredients(selectedIngredients.filter(selectedIngredient => selectedIngredient !== ingredient));
+    setSelectedIngredients(prevIngredients => {
+      const updatedIngredients = prevIngredients.filter(selectedIngredient => selectedIngredient !== ingredient);
+      localStorage.setItem('selectedIngredients', JSON.stringify(updatedIngredients));
+      return updatedIngredients;
+    });
     // See if the ingredient is from the list or manually entered
     if (checkBoxRef.current[ingredient]) {
       checkBoxRef.current[ingredient].checked = false;
@@ -155,7 +180,7 @@ function Recognition() {
                     {/* Display the uploaded image */}
                     <div className="flex flex-col text-center items-center">
                       <div className="max-w-80">
-                        {imageFile && <img className="w-80 shadow-custom" src={URL.createObjectURL(imageFile)} alt="food image" />}
+                        {image && <img className="w-80 shadow-custom" src={image} alt="food image" />}
                         <UploadOrSnap />
                       </div>
                     </div>
@@ -166,11 +191,11 @@ function Recognition() {
                             <tr className="w-auto">
                               <th>&nbsp;</th>
                               <th>Food</th>
-                              <th class="whitespace-pre-line">Probability (%)</th>
-                              <th class="whitespace-pre-line">Energy (kcal)</th>
-                              <th class="whitespace-pre-line">Protein (kcal)</th>
-                              <th class="whitespace-pre-line">Fat (kcal)</th>
-                              <th class="whitespace-pre-line">Carbohydrates (kcal)</th>
+                              <th className="whitespace-pre-line">Probability (%)</th>
+                              <th className="whitespace-pre-line">Energy (kcal)</th>
+                              <th className="whitespace-pre-line">Protein (kcal)</th>
+                              <th className="whitespace-pre-line">Fat (kcal)</th>
+                              <th className="whitespace-pre-line">Carbohydrates (kcal)</th>
                             </tr>
                           </thead>         
                           <tbody>
