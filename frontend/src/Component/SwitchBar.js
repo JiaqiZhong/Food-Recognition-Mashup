@@ -28,14 +28,14 @@ function SwitchBar(props) {
     }
 
     return (
-        <div className="flex flex-col text-center items-center justify-center text-white p-6 space-y-2">
+        <div className="flex flex-col text-center items-center justify-center text-white p-2 space-y-3">
             {/* Switch buttons for "Nutrition Facts" and "Find Recipes"*/}
             <div className="flex flex-row items-center justify-center border border-secondaryButtonColor rounded p-1 mx-4 w-full sm:w-2/3">
                 <SecondaryButton onClick={handleNutritionFacts} isActive={isNutritionFacts}>Nutrition Facts</SecondaryButton>
                 <SecondaryButton onClick={handleSearch} isActive={!isNutritionFacts}>Find Recipes</SecondaryButton>
             </div>
             {/* Display nutrition facts */}
-            <div className="flex flex-col text-center items-center justify-center w-full space-y-2">
+            <div className="flex flex-col text-center items-center justify-center w-full space-y-3">
                 <p className="font-serif text-xl">Which one did I guess right? Select them to find your favourite recipes!</p>
                 {/* Manually add ingredients */}
                 <div className="space-x-3">
@@ -43,7 +43,7 @@ function SwitchBar(props) {
                 <button className="bg-white text-gray-800 font-georgia font-bold px-2 h-8 rounded shadow-custom transition-transform transform hover:scale-105" onClick={handleAddIngredient}>Add</button>
                 </div>
                 {/* Display each manually added ingredient on a sticky note*/}
-                <div className="flex flex-wrap text-center items-center justify-center">
+                <div className="flex flex-wrap text-center items-center justify-center space-y-2">
                 {selectedIngredients.map((selectedIngredient, index) => {
                     return (
                     <button className="bg-button bg-contain bg-center bg-no-repeat text-gray-800 font-georgia font-bold p-6 hover:bg-sticker" key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>

@@ -35,7 +35,10 @@ function Snap() {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     // Pass the snapped photo to the food recognition page
-                    navigate(`/Recognition`, { state: { image: file } });
+                    const base64String = reader.result;
+                    localStorage.setItem('newImage', base64String);
+                    localStorage.setItem('selectedIngredients', []);
+                    navigate(`/Recognition`, { state: { image: file, base64: base64String } });
                 }
                 reader.readAsDataURL(file);
             }

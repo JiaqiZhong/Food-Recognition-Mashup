@@ -160,66 +160,61 @@ function Recognition() {
   }
 
   return (
-    <div>
+    <div className="p-4">
+      <SwitchBar         
+        manuallyEnteredIngredients={manuallyEnteredIngredients}
+        handleTextAreaChange={handleTextAreaChange}
+        handleAddIngredient={handleAddIngredient}
+        selectedIngredients={selectedIngredients}
+        handleDeleteIngredient={handleDeleteIngredient} 
+      />
       {loading ? (
-        <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">Loading predicted results...</div>
+        <div className="flex flex-col text-center items-center justify-center text-white font-serif text-xl">Loading predicted results...</div>
       ) : (
         errorMessage ? (
-          <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">{errorMessage}</div>
+          <div className="flex flex-col text-center items-center justify-center text-white font-serif text-xl">{errorMessage}</div>
         ) : (
-          <div className="flex flex-col text-center items-center justify-center text-white p-6 space-y-2">
-              <SwitchBar         
-                manuallyEnteredIngredients={manuallyEnteredIngredients}
-                handleTextAreaChange={handleTextAreaChange}
-                handleAddIngredient={handleAddIngredient}
-                selectedIngredients={selectedIngredients}
-                handleDeleteIngredient={handleDeleteIngredient} 
-              />
-                {!isSearchRecipes ? (
-                  <div className="flex flex-col md:flex-row md:space-x-4">
-                    {/* Display the uploaded image */}
-                    <div className="flex flex-col text-center items-center">
-                      <div className="max-w-80">
-                        {image && <img className="w-80 shadow-custom" src={image} alt="food image" />}
-                        <UploadOrSnap />
-                      </div>
-                    </div>
-                    {/* Table for displaying the nutrition facts data */}
-                    <div className="font-serif text-lg text-black bg-paper bg-100 bg-center bg-no-repeatrounded p-10">
-                      <table className="table-auto m-2">
-                          <thead>
-                            <tr className="w-auto">
-                              <th>&nbsp;</th>
-                              <th>Food</th>
-                              <th className="whitespace-pre-line">Probability (%)</th>
-                              <th className="whitespace-pre-line">Energy (kcal)</th>
-                              <th className="whitespace-pre-line">Protein (kcal)</th>
-                              <th className="whitespace-pre-line">Fat (kcal)</th>
-                              <th className="whitespace-pre-line">Carbohydrates (kcal)</th>
-                            </tr>
-                          </thead>         
-                          <tbody>
-                            {predictedResults.map((result) => (
-                              <tr key={result.name}>
-                                <td className="border-b border-gridColor border-opacity-50"><input id="checkbox" value={result.name} type="checkbox" 
-                                ref={(ref) => (checkBoxRef.current[result.name] = ref)}
-                                onChange={handleCheckboxChange}/></td>
-                                <td className="border-b border-gridColor border-opacity-50">{result.name}</td>
-                                <td className="border-b border-gridColor border-opacity-50">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
-                                <td className="border-b border-gridColor border-opacity-50">{result.energy}</td>
-                                <td className="border-b border-gridColor border-opacity-50">{result.protein}</td>
-                                <td className="border-b border-gridColor border-opacity-50">{result.fat}</td>
-                                <td className="border-b border-gridColor border-opacity-50">{result.carb}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                      </table>
-                    </div>
-                  </div>
-              ) : (
-                // Search for recipes with selected ingredients
-                <Recipes ingredients={selectedIngredients}/>
-              )}
+          <div className="flex flex-col text-center items-center justify-center text-white px-4">
+            <div className="flex flex-col md:flex-row md:space-x-4">
+              {/* Display the uploaded image */}
+              <div className="flex flex-col text-center items-center">
+                <div className="max-w-80">
+                  {image && <img className="w-80 shadow-custom" src={image} alt="food image" />}
+                  <UploadOrSnap />
+                </div>
+              </div>
+              {/* Table for displaying the nutrition facts data */}
+              <div className="font-serif text-lg text-black bg-paper bg-100 bg-center bg-no-repeatrounded p-10">
+                <table className="table-auto m-2">
+                    <thead>
+                      <tr className="w-auto">
+                        <th>&nbsp;</th>
+                        <th>Food</th>
+                        <th className="whitespace-pre-line">Probability (%)</th>
+                        <th className="whitespace-pre-line">Energy (kcal)</th>
+                        <th className="whitespace-pre-line">Protein (kcal)</th>
+                        <th className="whitespace-pre-line">Fat (kcal)</th>
+                        <th className="whitespace-pre-line">Carbohydrates (kcal)</th>
+                      </tr>
+                    </thead>         
+                    <tbody>
+                      {predictedResults.map((result) => (
+                        <tr key={result.name}>
+                          <td className="border-b border-gridColor border-opacity-50"><input id="checkbox" value={result.name} type="checkbox" 
+                          ref={(ref) => (checkBoxRef.current[result.name] = ref)}
+                          onChange={handleCheckboxChange}/></td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.name}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.energy}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.protein}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.fat}</td>
+                          <td className="border-b border-gridColor border-opacity-50">{result.carb}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         )
       )}
