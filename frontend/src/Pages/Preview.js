@@ -22,7 +22,9 @@ function Preview() {
         const formData = new FormData();
         formData.append("food_image", imageFile);
         // Pass the image data to the food recognition page
+        localStorage.setItem('selectedIngredients', []);
         navigate(`/Recognition`, { state: { image: imageFile, base64: base64 } });
+        
     }
 
     return (

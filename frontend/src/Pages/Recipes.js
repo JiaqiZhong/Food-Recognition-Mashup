@@ -130,25 +130,25 @@ function Recipes() {
     }
 
     return (
-        <div>
+        <div className="p-4">
             <SwitchBar 
-                    selectedIngredients={selectedIngredients}
-                    manuallyEnteredIngredients={manuallyEnteredIngredients}
-                    handleTextAreaChange={handleTextAreaChange}
-                    handleAddIngredient={handleAddIngredient}
-                    handleDeleteIngredient={handleDeleteIngredient}
-                />
+                selectedIngredients={selectedIngredients}
+                manuallyEnteredIngredients={manuallyEnteredIngredients}
+                handleTextAreaChange={handleTextAreaChange}
+                handleAddIngredient={handleAddIngredient}
+                handleDeleteIngredient={handleDeleteIngredient}
+            />
             {loading ? (
-                <div className="flex flex-col text-center items-center justify-center text-white min-h-screen font-serif text-xl">Loading predicted results...</div>
+                <div className="flex flex-col text-center items-center justify-center text-white font-serif text-xl">Loading predicted results...</div>
             ) : ( 
                 errorMessage ? (
                     <div className="flex flex-col text-white justify-center items-center font-serif text-xl">{errorMessage}</div>
                 ) : (
                     <div className="flex flex-col text-center items-center justify-center text-white h-full">
                         <div>
-                            <div className="flex flex-wrap mx-6 my-4 justify-center">
+                            <div className="flex flex-wrap mx-10 justify-center">
                                 {currentRecipeData.map((recipe, index) => (
-                                    <div className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4" key={index}>
+                                    <div className="w-full sm:w-1/2 lg:w-1/4 p-3" key={index}>
                                         {/* Recipe cards */}
                                         <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow transition-transform transform hover:scale-105">
                                             <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
