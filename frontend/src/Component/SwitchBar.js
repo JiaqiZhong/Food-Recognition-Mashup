@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { SecondaryButton } from './Buttons';
 
+// A switch bar that contain two buttons for navigating between "nutrition facts" page and "find recipes" page
 function SwitchBar(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    //const [isNutritionFacts, setIsNutritionFacts] = useState(true);
     const { selectedIngredients, manuallyEnteredIngredients, handleTextAreaChange, handleAddIngredient, handleDeleteIngredient } = props;
     const initialIsNutritionFacts = location.pathname === '/Recognition';
     const [isNutritionFacts, setIsNutritionFacts] = useState(initialIsNutritionFacts);
 
+    // Navigate to "nutrition facts" page
     const handleNutritionFacts = (e) => {
         e.preventDefault();
         setIsNutritionFacts(true);
@@ -18,7 +19,7 @@ function SwitchBar(props) {
         console.log(isNutritionFacts);
     }
 
-    // Search for recipes based on the selected ingredients
+    // Navigate to "search recipes" page
     const handleSearch = (e) => {
         e.preventDefault();
         setIsNutritionFacts(false);
@@ -39,14 +40,14 @@ function SwitchBar(props) {
                 <p className="font-serif text-xl">Which one did I guess right? Select them to find your favourite recipes!</p>
                 {/* Manually add ingredients */}
                 <div className="space-x-3">
-                <input className="bg-transparent rounded h-8 border border-white w-80 font-serif text-lg p-1" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more ingredients here, one at a time" onChange={handleTextAreaChange}></input>
-                <button className="bg-white text-gray-800 font-georgia font-bold px-2 h-8 rounded shadow-custom transition-transform transform hover:scale-105" onClick={handleAddIngredient}>Add</button>
+                    <input className="bg-transparent rounded h-8 border border-white w-80 font-serif text-lg p-1" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more ingredients here, one at a time" onChange={handleTextAreaChange}></input>
+                    <button className="bg-white text-gray-800 font-georgia font-bold px-2 h-8 rounded shadow-custom transition-transform transform hover:scale-105" onClick={handleAddIngredient}>Add</button>
                 </div>
                 {/* Display each manually added ingredient on a sticky note*/}
                 <div className="flex flex-wrap text-center items-center justify-center space-y-2">
                 {selectedIngredients.map((selectedIngredient, index) => {
                     return (
-                    <button className="bg-button bg-contain bg-center bg-no-repeat text-gray-800 font-georgia font-bold p-6 hover:bg-sticker" key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>
+                    <button className="bg-ingredient-label bg-contain bg-center bg-no-repeat text-gray-800 font-georgia font-bold p-6 hover:bg-ingredient-label-with-closing-button" key={index} onClick={(e) => handleDeleteIngredient(e, selectedIngredient)}>
                         {
                         selectedIngredient.includes(" ") ?
                             // Split by spaces if there are spaces in selectedIngredient

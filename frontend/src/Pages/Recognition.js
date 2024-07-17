@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef, useMemo, memo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import data from '../JSON/predictionsWithNutritionFacts';
 import UploadOrSnap from '../Component/UploadOrSnap';
-import Recipes from './Recipes';
-import { SecondaryButton } from '../Component/Buttons';
 import SwitchBar from '../Component/SwitchBar';
 
+// Food image recognition page that display the predicted ingredients and their nutrition facts
 function Recognition() {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -17,17 +15,17 @@ function Recognition() {
     return storedSelectedIngredients ? JSON.parse(storedSelectedIngredients) : [];
   });
   const [manuallyEnteredIngredients, setManuallyEnteredIngredients] = useState('');
-  const [isSearchRecipes, setIsSearchRecipes] = useState(false);
+  const [image, setImage] = useState(null);
   const checkBoxRef = useRef({});
-  const navigate = useNavigate();
+
+
   const location = useLocation();
   const imageFile = location.state?.image;
   const base64 = location.state?.base64;
-  const [image, setImage] = useState(null);
-  
+
+  // Set the initial state of the local storage of selected ingredients
   useEffect(() => {
     localStorage.setItem('selectedIngredients', JSON.stringify(selectedIngredients));
-    console.log(selectedIngredients);
   }, [selectedIngredients]);
 
   // Set the initial state of the checkboxes based on selectedIngredients
@@ -39,31 +37,40 @@ function Recognition() {
     });
   }, [predictedResults, selectedIngredients]);
 
-  // Get predicted results from the given image
+  // Set the initial state of predicted results based on input image
   useEffect(() => {
     const storedImage = localStorage.getItem('storedImage');
     const newImage = localStorage.getItem('newImage');
-    const storedData = localStorage.getItem('result');
+    const storedResults = localStorage.getItem('result');
 
+    // Case 1: First time uploading an image / taking a photo
     if (storedImage === null) {
-      console.log("First time uploading an image, fetch new data")
+      console.log("First time uploading an image, fetching new data")
       getPredictions("http://localhost:4000/recognition/upload", imageFile);
       setImage(newImage);
     }
-    else if (storedData && storedImage === newImage) {
+
+    // Case 2: The predicted results and nutrition facts for the input image have been loaded and stored in the local storage,
+    // and the input image hasn't been modified (prevent multiple unnecessary calls to api during
+    // refresh and navigation)
+    else if (storedResults && storedImage === newImage) {
       console.log("Same image, using cached data");
-      setPredictedResults(JSON.parse(storedData));
+      setPredictedResults(JSON.parse(storedResults));
       setImage(storedImage);
       setLoading(false);
-    } 
+    }
+
+    // Case 3: The input image has been modified
     else {
-      console.log("Different image, fetch new data");
+      console.log("Different image, fetching new data");
       getPredictions("http://localhost:4000/recognition/upload", imageFile);
       setImage(newImage);
     }
   }, [imageFile]);
 
+  // Get predicted results from "clarifai" route
   function getPredictions(url, image) {
+    // Get predicted results with uploaded image as input
     const formData = new FormData();
     formData.append("food_image", image);
     axios.post(url, formData)
@@ -71,6 +78,7 @@ function Recognition() {
         let results = res.data.results;
         const promises = results.map(async (result) => {
           try {
+            // Get nutrition facts of each result
             const res = await axios.get(`http://localhost:4000/nutrition-facts/${result.name}`);
             result.energy = res.data.energy.quantity;
             result.protein = res.data.protein.quantity;
@@ -161,12 +169,12 @@ function Recognition() {
 
   return (
     <div className="p-4">
-      <SwitchBar         
-        manuallyEnteredIngredients={manuallyEnteredIngredients}
-        handleTextAreaChange={handleTextAreaChange}
-        handleAddIngredient={handleAddIngredient}
-        selectedIngredients={selectedIngredients}
-        handleDeleteIngredient={handleDeleteIngredient} 
+      <SwitchBar
+          selectedIngredients={selectedIngredients}
+          manuallyEnteredIngredients={manuallyEnteredIngredients}
+          handleTextAreaChange={handleTextAreaChange}
+          handleAddIngredient={handleAddIngredient}
+          handleDeleteIngredient={handleDeleteIngredient}
       />
       {loading ? (
         <div className="flex flex-col text-center items-center justify-center text-white font-serif text-xl">Loading predicted results...</div>
@@ -186,6 +194,7 @@ function Recognition() {
               {/* Table for displaying the nutrition facts data */}
               <div className="font-serif text-lg text-black bg-paper bg-100 bg-center bg-no-repeatrounded p-10">
                 <table className="table-auto m-2">
+                    {/* Column name */}
                     <thead>
                       <tr className="w-auto">
                         <th>&nbsp;</th>
@@ -197,12 +206,21 @@ function Recognition() {
                         <th className="whitespace-pre-line">Carbohydrates (kcal)</th>
                       </tr>
                     </thead>         
+                    {/* Data entries */}
                     <tbody>
                       {predictedResults.map((result) => (
                         <tr key={result.name}>
-                          <td className="border-b border-gridColor border-opacity-50"><input id="checkbox" value={result.name} type="checkbox" 
-                          ref={(ref) => (checkBoxRef.current[result.name] = ref)}
-                          onChange={handleCheckboxChange}/></td>
+                          {/* Checkbox */}
+                          <td className="border-b border-gridColor border-opacity-50">
+                            <input
+                              id="checkbox" 
+                              value={result.name}
+                              type="checkbox" 
+                              ref={(ref) => (checkBoxRef.current[result.name] = ref)}
+                              onChange={handleCheckboxChange}
+                            />
+                          </td>
+                          {/* Ingredients and their nutrition facts */}
                           <td className="border-b border-gridColor border-opacity-50">{result.name}</td>
                           <td className="border-b border-gridColor border-opacity-50">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
                           <td className="border-b border-gridColor border-opacity-50">{result.energy}</td>

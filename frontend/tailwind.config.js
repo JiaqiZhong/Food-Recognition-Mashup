@@ -17,11 +17,10 @@ module.exports = {
       backgroundImage: {
         'original': "url('/src/Images/wooden-tray.jpg')",
         'wooden-tray-only': "url('/src/Images/wooden-tray-only.jpg')",
-        'button': "url('/src/Images/sticker.png')",
-        'notebook': "url('/src/Images/notebook.png')",
+        'ingredient-label': "url('/src/Images/sticker.png')",
+        'recipe-book': "url('/src/Images/recipe-book.png')",
         'paper': "url('/src/Images/paper.png')",
-        'camera': "url('/src/Images/phone-frame.png')",
-        'sticker': "url('/src/Images/sticky-note.png')",
+        'ingredient-label-with-closing-button': "url('/src/Images/sticker-with-closing-button.png')",
       },
       backgroundSize: {
         '100': '100% 100%',

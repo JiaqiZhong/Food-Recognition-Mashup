@@ -1,5 +1,6 @@
 import React from 'react';
 
+// General-purpose buttons
 const PrimaryButton = ({ children, onClick }) => {
   return (
     <button
@@ -11,6 +12,7 @@ const PrimaryButton = ({ children, onClick }) => {
   );
 };
 
+// Switch buttons for "nutrition facts" and "find recipes"
 const SecondaryButton = ({ children, onClick, isActive }) => {
   return (
     <button

@@ -96,18 +96,18 @@ function recognizeFood(inputs) {
                 }
 
                 let results = [];
-                // for (const c of response.outputs[0].data.concepts) {
-                //     results.push({
-                //         name: c.name,
-                //         value: c.value
-                //     })
-                // }
-                for (i = 0; i < 2; i++) {
+                for (const c of response.outputs[0].data.concepts) {
                     results.push({
-                        name: response.outputs[0].data.concepts[i].name,
-                        value: response.outputs[0].data.concepts[i].value
+                        name: c.name,
+                        value: c.value
                     })
                 }
+                // for (i = 0; i < 2; i++) {
+                //     results.push({
+                //         name: response.outputs[0].data.concepts[i].name,
+                //         value: response.outputs[0].data.concepts[i].value
+                //     })
+                // }
                 resolve(results);
             }
         );

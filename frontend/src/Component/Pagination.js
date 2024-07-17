@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import leftArrowIcon from '../Icons/left-arrow-icon.png';
 import rightArrowIcon from '../Icons/right-arrow-icon.png';
 
+// Pagination logic and UI for recipe list page
 const Pagination = props => {
   const {
     onPageChange,

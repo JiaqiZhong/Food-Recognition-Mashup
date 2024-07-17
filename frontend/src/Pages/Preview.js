@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import ButtonGroup from '../Component/ButtonGroup';
 import { PrimaryButton } from '../Component/Buttons';
 
+// Preview uploaded image
 function Preview() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -21,8 +21,9 @@ function Preview() {
         e.preventDefault();
         const formData = new FormData();
         formData.append("food_image", imageFile);
-        // Pass the image data to the food recognition page
+        // Clear selected ingredients
         localStorage.setItem('selectedIngredients', []);
+        // Pass the image data to the food recognition page
         navigate(`/Recognition`, { state: { image: imageFile, base64: base64 } });
         
     }

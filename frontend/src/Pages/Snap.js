@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 import camera from "../Images/phone-frame.png";
 
+// "Take A Photo" page that allows the user to turn on the camera and take a photo of food
 function Snap() {
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null);
@@ -78,11 +79,13 @@ function Snap() {
                 )}
                 <div className="absolute top-96 left-96 right-96">
                     {isStateOne ? ( 
+                        // Capture state
                         <ButtonGroup>
                             <PrimaryButton onClick={handleCapture}>Snap</PrimaryButton>
                             <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
                         </ButtonGroup>
                     ) : (
+                        // Retake state
                         <ButtonGroup>
                             <PrimaryButton onClick={handleRetake}>Retake</PrimaryButton>
                             <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
