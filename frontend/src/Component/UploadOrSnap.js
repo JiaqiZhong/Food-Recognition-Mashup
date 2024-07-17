@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { PrimaryButton } from './Buttons';
 import ButtonGroup from './ButtonGroup';
 
-// Basic welcome page that allows user to select login or sign in
+// Buttons for uploading an image or taking a photo
 function UploadOrSnap() { 
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
@@ -15,10 +15,10 @@ function UploadOrSnap() {
       if (inputImage) {
           const reader = new FileReader();
           reader.onloadend = () => {
-              //navigate(`/Preview?image=${encodeURIComponent(reader.result)}`);
-              const base64String = reader.result;
-              navigate(`/Preview`, { state: { image: inputImage, base64: base64String } });
-              localStorage.setItem('newImage', base64String);
+              const base64 = reader.result;
+              // Pass the image data to the preview page
+              navigate(`/Preview`, { state: { image: inputImage, base64: base64 } });
+              localStorage.setItem('newImage', base64);
           }
           reader.readAsDataURL(inputImage);
       }
@@ -30,6 +30,7 @@ function UploadOrSnap() {
     navigate('/Snap');
   }
 
+  // When user clicks "Upload An Image" button
   const triggerFileInput = () => {
     fileInputRef.current.click();
   }

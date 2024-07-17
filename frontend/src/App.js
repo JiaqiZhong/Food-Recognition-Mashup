@@ -32,6 +32,7 @@ function App() {
   function BackgroundWrapper({ children }) {
     const location = useLocation();
   
+    // Two backgrounds are used between different pages
     const getBackgroundClass = (path) => {
       if ((path === '/') || (path === '/Preview') || (path === '/Snap')) {
         return 'bg-original';
