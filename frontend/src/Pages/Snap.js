@@ -3,14 +3,16 @@ import { PrimaryButton } from '../Component/Buttons';
 import ButtonGroup from '../Component/ButtonGroup';
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
+import camera from "../Images/phone-frame.png";
 
+// "Take A Photo" page that allows the user to turn on the camera and take a photo of food
 function Snap() {
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null);
     const [isStateOne, setIsStateOne] = useState(true);
     const navigate = useNavigate();
 
-    // create a capture function
+    // Create a capture function
     const handleCapture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         console.log(imageSrc);
@@ -18,11 +20,13 @@ function Snap() {
         setIsStateOne(false);
     }, [webcamRef]);
 
+    // Back to the landing page
     const handleCancel = (e) => {
         e.preventDefault();
         navigate('/');
     }
 
+    // Navigate to the food recognition page
     const handleConfirm = (e) => {
         e.preventDefault();
         dataUrlToFile(imgSrc)
@@ -31,20 +35,25 @@ function Snap() {
             if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    //navigate(`/Preview?image=${encodeURIComponent(reader.result)}`);
-                    navigate(`/Recognition`, { state: { image: file } });
+                    // Pass the snapped photo to the food recognition page
+                    const base64String = reader.result;
+                    localStorage.setItem('newImage', base64String);
+                    localStorage.setItem('selectedIngredients', []);
+                    navigate(`/Recognition`, { state: { image: file, base64: base64String } });
                 }
                 reader.readAsDataURL(file);
             }
         });
     }
 
+    // Retake photo
     const handleRetake = (e) => {
         e.preventDefault();
         setIsStateOne(true);
         setImgSrc(null);
     }
 
+    // Convert the image to image file
     function dataUrlToFile(dataUrl) {
         let file = (fetch(dataUrl)
             .then(res => res.blob())
@@ -57,22 +66,33 @@ function Snap() {
 
     return (
         <div className="flex flex-col text-center items-center justify-center h-screen">
-            {imgSrc ? (
-                <img src={imgSrc} alt="webcam" />
-            ) : (
-                <Webcam height={600} width={600} ref={webcamRef} mirrored={true}/>
-            )}
-            {isStateOne ? ( 
-                <ButtonGroup>
-                    <PrimaryButton onClick={handleCapture}>Snap</PrimaryButton>
-                    <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
-                </ButtonGroup>
-            ) : (
-                <ButtonGroup>
-                    <PrimaryButton onClick={handleRetake}>Retake</PrimaryButton>
-                    <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
-                </ButtonGroup>
-            )}
+            <div className="relative w-frame h-frame">
+                {imgSrc ? (
+                    // Display the captured image
+                    <img src={imgSrc} className="absolute left-72 top-28 h-60 w-96 object-cover" alt="captured image" />
+                ) : (
+                    // Display the webcam and a fake phone frame
+                    <div>
+                        <Webcam ref={webcamRef} mirrored={true} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
+                        <img src={camera} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
+                    </div>
+                )}
+                <div className="absolute top-96 left-96 right-96">
+                    {isStateOne ? ( 
+                        // Capture state
+                        <ButtonGroup>
+                            <PrimaryButton onClick={handleCapture}>Snap</PrimaryButton>
+                            <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+                        </ButtonGroup>
+                    ) : (
+                        // Retake state
+                        <ButtonGroup>
+                            <PrimaryButton onClick={handleRetake}>Retake</PrimaryButton>
+                            <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
+                        </ButtonGroup>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

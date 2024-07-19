@@ -102,6 +102,12 @@ function recognizeFood(inputs) {
                         value: c.value
                     })
                 }
+                // for (i = 0; i < 2; i++) {
+                //     results.push({
+                //         name: response.outputs[0].data.concepts[i].name,
+                //         value: response.outputs[0].data.concepts[i].value
+                //     })
+                // }
                 resolve(results);
             }
         );
