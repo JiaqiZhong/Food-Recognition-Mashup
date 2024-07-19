@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/my-react-app/static/css/main.2e1c0b21.css",
+    "main.js": "/my-react-app/static/js/main.bb92744c.js",
+    "static/js/453.8ab44547.chunk.js": "/my-react-app/static/js/453.8ab44547.chunk.js",
+    "static/media/recipe-book.png": "/my-react-app/static/media/recipe-book.bcb3d46621ace37fb9e0.png",
+    "static/media/paper.png": "/my-react-app/static/media/paper.2267dc209fabaed8629b.png",
+    "static/media/wooden-tray.jpg": "/my-react-app/static/media/wooden-tray.f166264cf3e5890237a1.jpg",
+    "static/media/app-logo.png": "/my-react-app/static/media/app-logo.18282270875da0cb13e9.png",
+    "static/media/wooden-tray-only.jpg": "/my-react-app/static/media/wooden-tray-only.9085a4d76ea72075537e.jpg",
+    "static/media/sticker-with-closing-button.png": "/my-react-app/static/media/sticker-with-closing-button.dab455452153be2d0c0d.png",
+    "static/media/sticker.png": "/my-react-app/static/media/sticker.bf07811787c31aba2578.png",
+    "static/media/phone-frame.png": "/my-react-app/static/media/phone-frame.402190905cd52b1dc4e9.png",
+    "static/media/recipe-placeholder-image.png": "/my-react-app/static/media/recipe-placeholder-image.5f8528d62514e06cbf4c.png",
+    "static/media/serving-size-icon.png": "/my-react-app/static/media/serving-size-icon.570775569dbbc4525970.png",
+    "static/media/camera-frame.png": "/my-react-app/static/media/camera-frame.ed0883198763886e5d3d.png",
+    "static/media/menu-icon.png": "/my-react-app/static/media/menu-icon.d9e76fd12551efa61721.png",
+    "static/media/profile-icon.png": "/my-react-app/static/media/profile-icon.8569aef014369d3c9c54.png",
+    "static/media/calories-icon.png": "/my-react-app/static/media/calories-icon.869098c3edd7e86d666b.png",
+    "static/media/cooking-time-icon.png": "/my-react-app/static/media/cooking-time-icon.abb4ec44041fe5f3f83a.png",
+    "static/media/logo.svg": "/my-react-app/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/my-react-app/index.html",
+    "main.2e1c0b21.css.map": "/my-react-app/static/css/main.2e1c0b21.css.map",
+    "main.bb92744c.js.map": "/my-react-app/static/js/main.bb92744c.js.map",
+    "453.8ab44547.chunk.js.map": "/my-react-app/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2e1c0b21.css",
+    "static/js/main.bb92744c.js"
+  ]
+}
