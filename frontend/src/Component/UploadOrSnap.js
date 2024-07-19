@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PrimaryButton } from './Buttons';
 import ButtonGroup from './ButtonGroup';
 
-// Basic welcome page that allows user to select login or sign in
+// Buttons for uploading an image or taking a photo
 function UploadOrSnap() { 
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   // Button listener for "Upload An Image"
   const handleUploadAnImage = (e) => {
@@ -14,8 +15,10 @@ function UploadOrSnap() {
       if (inputImage) {
           const reader = new FileReader();
           reader.onloadend = () => {
-              //navigate(`/Preview?image=${encodeURIComponent(reader.result)}`);
-              navigate(`/Preview`, { state: { image: inputImage } });
+              const base64 = reader.result;
+              // Pass the image data to the preview page
+              navigate(`/Preview`, { state: { image: inputImage, base64: base64 } });
+              localStorage.setItem('newImage', base64);
           }
           reader.readAsDataURL(inputImage);
       }
@@ -27,22 +30,21 @@ function UploadOrSnap() {
     navigate('/Snap');
   }
 
+  // When user clicks "Upload An Image" button
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
+  }
+
   return (
     <ButtonGroup>
       <div>
+        <PrimaryButton onClick={triggerFileInput}>Upload An Image</PrimaryButton>
         <input
             type="file"
-            id="imgFile"
+            ref={fileInputRef}
             onChange={handleUploadAnImage}
             hidden
-            />
-        <label
-            htmlFor="imgFile"
-            type="button"
-            className="bg-orange-400 text-white font-bold py-2 px-4 m-2 rounded shadow-md w-full"
-            id="uploadImage">
-            Upload An Image
-        </label>
+        />
       </div>
       <div>
           <PrimaryButton onClick={handleTakeAPhoto}>Take A Photo</PrimaryButton>
