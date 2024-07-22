@@ -12,7 +12,7 @@ import Navbar from './Component/Navbar';
 function App() {
   return (
     <div>
-      <HashRouter basename='FoodLens'>
+      <HashRouter>
         <BackgroundWrapper>
           <Navbar />
           <Routes>
