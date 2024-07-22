@@ -53,7 +53,8 @@ function Recipes() {
         // Case 3: Selected ingredients have been modified
         else {
             console.log("Modified ingredients, fetching new data.")
-            getRecipes('http://localhost:4000/recipes/find-recipes/', selectedIngredients)
+            //getRecipes('http://localhost:4000/recipes/find-recipes/', selectedIngredients)
+            getRecipes('https://food-lens-server.vercel.app/recipes/find-recipes/', selectedIngredients)
             localStorage.setItem('selectedIngredients', JSON.stringify(selectedIngredients))
         }
     }, [selectedIngredients]);
@@ -67,7 +68,8 @@ function Recipes() {
             const promises = recipes.map(async (recipe) => {
                 try {
                     // Get details of each recipe
-                    const res = await axios.get(`http://localhost:4000/recipes/${recipe.id}`);
+                    //const res = await axios.get(`http://localhost:4000/recipes/${recipe.id}`);
+                    const res = await axios.get(`https://food-lens-server.vercel.app/recipes/${recipe.id}`);
                     recipe.prepTime = res.data.readyInMinutes;
                     recipe.servings = res.data.servings;
                     recipe.cuisineType = res.data.cuisines;

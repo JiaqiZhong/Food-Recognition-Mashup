@@ -46,7 +46,8 @@ function Recognition() {
     // Case 1: First time uploading an image / taking a photo
     if (storedImage === null) {
       console.log("First time uploading an image, fetching new data")
-      getPredictions("http://localhost:4000/recognition/upload", imageFile);
+      //getPredictions("http://localhost:4000/recognition/upload", imageFile);
+      getPredictions("https://food-lens-server.vercel.app/recognition/upload", imageFile);
       setImage(newImage);
     }
 
@@ -63,7 +64,8 @@ function Recognition() {
     // Case 3: The input image has been modified
     else {
       console.log("Different image, fetching new data");
-      getPredictions("http://localhost:4000/recognition/upload", imageFile);
+      //getPredictions("http://localhost:4000/recognition/upload", imageFile);
+      getPredictions("https://food-lens-server.vercel.app/recognition/upload", imageFile);
       setImage(newImage);
     }
   }, [imageFile]);
@@ -79,7 +81,8 @@ function Recognition() {
         const promises = results.map(async (result) => {
           try {
             // Get nutrition facts of each result
-            const res = await axios.get(`http://localhost:4000/nutrition-facts/${result.name}`);
+            //const res = await axios.get(`http://localhost:4000/nutrition-facts/${result.name}`);
+            const res = await axios.get(`https://food-lens-server.vercel.app/nutrition-facts/${result.name}`);
             result.energy = res.data.energy.quantity;
             result.protein = res.data.protein.quantity;
             result.fat = res.data.fat.quantity;
