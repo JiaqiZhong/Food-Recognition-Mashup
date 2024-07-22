@@ -12,7 +12,7 @@ import Navbar from './Component/Navbar';
 function App() {
   return (
     <div>
-      <BrowserRouter basename='FoodLens'>
+      <BrowserRouter>
         <BackgroundWrapper>
           <Navbar />
           <Routes>
