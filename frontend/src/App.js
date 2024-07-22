@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 
 import Landing from './Pages/Landing';
 import Preview from './Pages/Preview';
@@ -12,7 +12,7 @@ import Navbar from './Component/Navbar';
 function App() {
   return (
     <div>
-      <HashRouter>
+      <BrowserRouter basename='FoodLens'>
         <BackgroundWrapper>
           <Navbar />
           <Routes>
@@ -24,7 +24,7 @@ function App() {
             <Route path="/Snap" element={<Snap />}/>
           </Routes>
         </BackgroundWrapper>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 
