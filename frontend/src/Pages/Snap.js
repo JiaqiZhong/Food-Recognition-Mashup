@@ -77,18 +77,11 @@ function Snap() {
 
     return (
         <div className="flex flex-col text-center items-center justify-center h-screen overflow-hidden">
-            <div className="relative w-frame h-frame">
-                {imgSrc ? (
-                    // Display the captured image
-                    <img src={imgSrc} className="absolute left-72 top-28 h-60 w-96 object-cover" alt="captured image" />
-                ) : (
-                    // Display the webcam and a fake phone frame
-                    <div>
-                        <Webcam ref={webcamRef} mirrored={!isPhoneOrTablet()} videoConstraints={videoConstraints} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
-                        <img src={camera} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
-                    </div>
-                )}
-                <div className="absolute top-96 left-96 right-96">
+            {/* if an image has been captured */}
+            {imgSrc ? (
+                <div className="space-y-8 mb-12">                    
+                    {/* // Display the captured image */}
+                    <img src={imgSrc} className="w-80 shadow-custom" alt="captured image" />
                     {isStateOne ? ( 
                         // Capture state
                         <ButtonGroup>
@@ -103,7 +96,31 @@ function Snap() {
                         </ButtonGroup>
                     )}
                 </div>
-            </div>
+            ) : (
+                // if no image has been captured
+                <div className="relative w-frame h-frame">
+                    {/* Display the webcam and a fake phone frame in a fixed position */}
+                    <div>
+                        <Webcam ref={webcamRef} mirrored={!isPhoneOrTablet()} videoConstraints={videoConstraints} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
+                        <img src={camera} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
+                    </div>                
+                    <div className="absolute top-96 left-96 right-96">
+                        {isStateOne ? ( 
+                            // Capture state
+                            <ButtonGroup>
+                                <PrimaryButton onClick={handleCapture}>Snap</PrimaryButton>
+                                <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+                            </ButtonGroup>
+                        ) : (
+                            // Retake state
+                            <ButtonGroup>
+                                <PrimaryButton onClick={handleRetake}>Retake</PrimaryButton>
+                                <PrimaryButton onClick={handleConfirm}>Confirm</PrimaryButton>
+                            </ButtonGroup>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
