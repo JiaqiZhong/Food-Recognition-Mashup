@@ -12,6 +12,17 @@ function Snap() {
     const [isStateOne, setIsStateOne] = useState(true);
     const navigate = useNavigate();
 
+    // Check if the user is on a mobile phone, tablet, or computer
+    const isPhoneOrTablet = () => {
+        return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    };
+
+    // Create video constraints
+    const videoConstraints = {
+        // If the user is on a mobile phone or a tablet, open the back camera, else on a computer can only open the front camera
+        facingMode: isPhoneOrTablet() ? { exact: 'environment' } : 'user'
+    };
+
     // Create a capture function
     const handleCapture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
@@ -65,7 +76,7 @@ function Snap() {
     }
 
     return (
-        <div className="flex flex-col text-center items-center justify-center h-screen">
+        <div className="flex flex-col text-center items-center justify-center h-screen overflow-hidden">
             <div className="relative w-frame h-frame">
                 {imgSrc ? (
                     // Display the captured image
@@ -73,7 +84,7 @@ function Snap() {
                 ) : (
                     // Display the webcam and a fake phone frame
                     <div>
-                        <Webcam ref={webcamRef} mirrored={true} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
+                        <Webcam ref={webcamRef} mirrored={true} videoConstraints={videoConstraints} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
                         <img src={camera} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
                     </div>
                 )}

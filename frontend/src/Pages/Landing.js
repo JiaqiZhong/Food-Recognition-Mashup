@@ -7,7 +7,7 @@ function Landing() {
   return (
     <div className="flex text-center items-center justify-center min-h-screen">
       <div className="flex flex-col text-center items-center justify-center text-white mx-8 space-y-4 md:mb-16 sm:mt-8 lg:mt-0">
-        {/* App name and slogan */}
+          {/* App name and slogan */}
           <h1 className="font-snell text-6xl">FoodLens</h1>
           <h2 className="font-georgia text-2xl font-bold">Snap it, know it, cook it.</h2>
           {/* Camera frame */}
