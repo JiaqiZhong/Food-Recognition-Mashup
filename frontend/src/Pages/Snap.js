@@ -84,7 +84,7 @@ function Snap() {
                 ) : (
                     // Display the webcam and a fake phone frame
                     <div>
-                        <Webcam ref={webcamRef} mirrored={true} videoConstraints={videoConstraints} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
+                        <Webcam ref={webcamRef} mirrored={!isPhoneOrTablet()} videoConstraints={videoConstraints} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
                         <img src={camera} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
                     </div>
                 )}
