@@ -18,13 +18,13 @@ function Navbar() {
           <div className="flex flex-row w-full sm:w-auto justify-between">
             {/* Show menu button only on small screen */}
             <button className="sm:hidden" onClick={toggleMenu}>
-              <img className="w-8" src={menuIcon}></img>
+              <img className="w-8" src={menuIcon} alt="menu"></img>
             </button>
             {/* App logo */}
-            <img src={appLogo} className="w-14 h-full sm:mr-8"></img>    
+            <img src={appLogo} className="w-14 h-full sm:mr-8" alt="logo"></img>    
             {/* Profile icon */}
             <a href="/" className="w-8 sm:hidden">
-              <img src={profileIcon}></img>
+              <img src={profileIcon} alt="profile"></img>
             </a>
           </div>
           <div id="menu" className={`flex w-full flex-col sm:block sm:flex-row sm:space-x-8 m-4 ${isMenuVisible ? 'block' : 'hidden'}`}>
@@ -35,7 +35,7 @@ function Navbar() {
           </div>
         </div>
         <a href="/" className="w-8 hidden sm:block">
-          <img src={profileIcon}></img>
+          <img src={profileIcon} alt="profile"></img>
         </a>
     </nav>
   );

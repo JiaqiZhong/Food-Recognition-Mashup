@@ -168,7 +168,7 @@ function Recipes() {
                                             <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
                                                 {/* Recipe image */}
                                                 <img className="w-full object-cover" src={`https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = recipePlaceholderImage;}}/>
-                                                <div className="flex flex-col mx-6 my-4 text-black space-y-2">
+                                                <div className="flex flex-col mx-4 sm:mx-6 my-4 text-black space-y-2">
                                                     {/* Recipe name */}
                                                     <h3 className="text-sm md:text-md lg:text-lg font-bold font-georgia text-black">{recipe.title}</h3>
                                                     <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">

@@ -44,7 +44,7 @@ const Pagination = props => {
         })}
         onClick={onPrevious}
       >
-        <img className="w-2" src={leftArrowIcon}></img>
+        <img className="w-2" src={leftArrowIcon} alt="left arrow"></img>
       </li>
       {paginationRange.map(pageNumber => {
         if (pageNumber === DOTS) {
@@ -71,7 +71,7 @@ const Pagination = props => {
         })}
         onClick={onNext}
       >
-        <img className="w-2" src={rightArrowIcon}></img>
+        <img className="w-2" src={rightArrowIcon} alt="right arrow"></img>
       </li>
     </ul>
   );
