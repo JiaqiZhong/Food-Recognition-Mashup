@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import UploadOrSnap from '../Component/UploadOrSnap';
 import SwitchBar from '../Component/SwitchBar';
-import predictionsData from '../JSON/predictionsData.json';
+// import predictionsData from '../JSON/predictionsData.json';
 
 // Food image recognition page that display the predicted ingredients and their nutrition facts
 function Recognition() {
@@ -43,27 +43,19 @@ function Recognition() {
     const newImage = localStorage.getItem('newImage');
     const storedResults = localStorage.getItem('result');
 
-    // Case 1: First time uploading an image / taking a photo
-    if (storedImage === null) {
-      console.log("First time uploading an image, fetching new data")
-      //getPredictions("http://localhost:4000/recognition/upload", imageFile);
-      getPredictions("https://food-lens-server.vercel.app/recognition/upload", imageFile);
-      setImage(newImage);
-    }
-
-    // Case 2: The predicted results and nutrition facts for the input image have been loaded and stored in the local storage,
+    // Case 1: The predicted results and nutrition facts for the input image have been loaded and stored in the local storage,
     // and the input image hasn't been modified (prevent multiple unnecessary calls to api during
     // refresh and navigation)
-    else if (storedResults && storedImage === newImage) {
+    if (storedResults && storedImage === newImage) {
       console.log("Same image, using cached data");
       setPredictedResults(JSON.parse(storedResults));
       setImage(storedImage);
       setLoading(false);
     }
 
-    // Case 3: The input image has been modified
+    // Case 2: First time uploading an image / taking a photo, or the input image has been modified
     else {
-      console.log("Different image, fetching new data");
+      console.log("New image, fetching new data");
       //getPredictions("http://localhost:4000/recognition/upload", imageFile);
       getPredictions("https://food-lens-server.vercel.app/recognition/upload", imageFile);
       setImage(newImage);

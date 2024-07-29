@@ -36,17 +36,17 @@ function Recipe() {
                                 <div className="font-serif text-sm sm:text-lg flex flex-row sm:flex-col lg:flex-row sm:space-y-4 space-y-0 lg:space-y-0 justify-between">
                                     {/* Cooking time */}
                                     <div className="flex flex-row items-center space-x-1">
-                                        <img src={cookingTimeIcon} className="w-6 sm:w-8"></img>
+                                        <img src={cookingTimeIcon} className="w-6 sm:w-8" alt="Cooking Time"></img>
                                         <p>{recipeDetails.prepTime} minutes</p>
                                     </div>
                                     {/* Servings */}
                                     <div className="flex flex-row items-center space-x-1">
-                                        <img src={servingSizeIcon} className="w-6 sm:w-8"></img>
+                                        <img src={servingSizeIcon} className="w-6 sm:w-8" alt="Serving Size"></img>
                                         <p>{recipeDetails.servings} servings</p>
                                     </div>
                                     {/* Calories */}
                                     <div className="flex flex-row items-center space-x-1">
-                                        <img src={caloriesIcon} className="w-6 sm:w-8"></img>
+                                        <img src={caloriesIcon} className="w-6 sm:w-8" alt="Calories"></img>
                                         <p>{recipeDetails.calories} kcal</p>
                                     </div>
                                 </div>

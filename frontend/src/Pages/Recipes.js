@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Pagination from '../Component/Pagination'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -6,7 +6,7 @@ import cookingTimeIcon from '../Icons/cooking-time-icon.png';
 import caloriesIcon from '../Icons/calories-icon.png';
 import SwitchBar from '../Component/SwitchBar';
 import recipePlaceholderImage from '../Images/recipe-placeholder-image.png';
-import recipesData from '../JSON/recipeData.json';
+// import recipesData from '../JSON/recipeData.json';
 
 // Recipes list page that contains a number of recipes of the selected ingredients
 function Recipes() {  
@@ -174,12 +174,12 @@ function Recipes() {
                                                     <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">
                                                         {/* Cooking time */}
                                                         <div className="flex flex-row items-center space-x-1">
-                                                            <img src={cookingTimeIcon} className="w-6 lg:w-8"></img>
+                                                            <img src={cookingTimeIcon} className="w-6 lg:w-8" alt="Cooking Time"></img>
                                                             <p>{recipe.prepTime} minutes</p>
                                                         </div>
                                                         {/* Calories */}
                                                         <div className="flex flex-row items-center space-x-1">
-                                                            <img src={caloriesIcon} className="w-6 lg:w-8"></img>
+                                                            <img src={caloriesIcon} className="w-6 lg:w-8" alt="Calories"></img>
                                                             <p>{recipe.calories} kcal</p>
                                                         </div>
                                                     </div>
