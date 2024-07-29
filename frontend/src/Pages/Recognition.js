@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import UploadOrSnap from '../Component/UploadOrSnap';
 import SwitchBar from '../Component/SwitchBar';
+import predictionsData from '../JSON/predictionsWithNutritionFacts.json';
 
 // Food image recognition page that display the predicted ingredients and their nutrition facts
 function Recognition() {
@@ -17,7 +18,6 @@ function Recognition() {
   const [manuallyEnteredIngredients, setManuallyEnteredIngredients] = useState('');
   const [image, setImage] = useState(null);
   const checkBoxRef = useRef({});
-
 
   const location = useLocation();
   const imageFile = location.state?.image;
@@ -188,14 +188,14 @@ function Recognition() {
           <div className="flex flex-col text-center items-center justify-center text-white px-4">
             <div className="flex flex-col md:flex-row md:space-x-4">
               {/* Display the uploaded image */}
-              <div className="flex flex-col text-center items-center">
+              <div className="flex order-2 md:order-1 flex-col text-center items-center">
                 <div className="max-w-80">
                   {image && <img className="w-80 shadow-custom" src={image} alt="food image" />}
                   <UploadOrSnap />
                 </div>
               </div>
               {/* Table for displaying the nutrition facts data */}
-              <div className="font-serif text-lg text-black bg-paper bg-100 bg-center bg-no-repeatrounded p-10">
+              <div className="font-serif order-1 md:order-2 text-xs text-black bg-paper bg-100 bg-center bg-no-repeatrounded p-5 mb-5 sm:text-lg sm:p-10">
                 <table className="table-auto m-2">
                     {/* Column name */}
                     <thead>
