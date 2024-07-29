@@ -214,7 +214,7 @@ function Recognition() {
                       {predictedResults.map((result) => (
                         <tr key={result.name}>
                           {/* Checkbox */}
-                          <td className="border-b border-gridColor border-opacity-50">
+                          <td className="border-b border-gridColor border-opacity-50 no-underline">
                             <input
                               id="checkbox" 
                               value={result.name}
@@ -224,12 +224,12 @@ function Recognition() {
                             />
                           </td>
                           {/* Ingredients and their nutrition facts */}
-                          <td className="border-b border-gridColor border-opacity-50">{result.name}</td>
-                          <td className="border-b border-gridColor border-opacity-50">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
-                          <td className="border-b border-gridColor border-opacity-50">{result.energy}</td>
-                          <td className="border-b border-gridColor border-opacity-50">{result.protein}</td>
-                          <td className="border-b border-gridColor border-opacity-50">{result.fat}</td>
-                          <td className="border-b border-gridColor border-opacity-50">{result.carb}</td>
+                          <td className="border-b border-gridColor border-opacity-50 no-underline">{result.name}</td>
+                          <td className="border-b border-gridColor border-opacity-50 no-underline">{+(Math.round(result.value * 100 + "e+2") + "e-2")}</td>
+                          <td className="border-b border-gridColor border-opacity-50 no-underline">{result.energy}</td>
+                          <td className="border-b border-gridColor border-opacity-50 no-underline">{result.protein}</td>
+                          <td className="border-b border-gridColor border-opacity-50 no-underline">{result.fat}</td>
+                          <td className="border-b border-gridColor border-opacity-50 no-underline">{result.carb}</td>
                         </tr>
                       ))}
                     </tbody>

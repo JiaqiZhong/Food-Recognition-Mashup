@@ -79,9 +79,9 @@ function Snap() {
         <div className="flex flex-col text-center items-center justify-center h-screen overflow-hidden">
             {/* if an image has been captured */}
             {imgSrc ? (
-                <div className="space-y-8 mb-12">                    
+                <div className="space-y-8 mb-12 overflow-hidden">                    
                     {/* // Display the captured image */}
-                    <img src={imgSrc} className="w-80 shadow-custom" alt="captured image" />
+                    <img src={imgSrc} className="w-80 h-80 shadow-custom object-cover" alt="captured image" />
                     {isStateOne ? ( 
                         // Capture state
                         <ButtonGroup>
