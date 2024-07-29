@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import UploadOrSnap from '../Component/UploadOrSnap';
 import SwitchBar from '../Component/SwitchBar';
-import predictionsData from '../JSON/predictionsWithNutritionFacts.json';
+import predictionsData from '../JSON/predictionsData.json';
 
 // Food image recognition page that display the predicted ingredients and their nutrition facts
 function Recognition() {
@@ -195,7 +195,7 @@ function Recognition() {
                 </div>
               </div>
               {/* Table for displaying the nutrition facts data */}
-              <div className="font-serif order-1 md:order-2 text-xs text-black bg-paper bg-100 bg-center bg-no-repeatrounded p-5 mb-5 sm:text-lg sm:p-10">
+              <div className="font-serif order-1 md:order-2 text-xs text-black bg-paper bg-100 bg-center bg-no-repeat p-5 mb-5 sm:text-lg sm:p-10">
                 <table className="table-auto m-2">
                     {/* Column name */}
                     <thead>

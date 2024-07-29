@@ -6,6 +6,7 @@ import cookingTimeIcon from '../Icons/cooking-time-icon.png';
 import caloriesIcon from '../Icons/calories-icon.png';
 import SwitchBar from '../Component/SwitchBar';
 import recipePlaceholderImage from '../Images/recipe-placeholder-image.png';
+import recipesData from '../JSON/recipeData.json';
 
 // Recipes list page that contains a number of recipes of the selected ingredients
 function Recipes() {  
@@ -158,10 +159,10 @@ function Recipes() {
                 ) : (
                     <div className="flex flex-col text-center items-center justify-center text-white h-full">
                         <div>
-                            <div className="flex flex-wrap mx-10 justify-center">
+                            <div className="flex text-xs md:text-sm lg:text-md flex-wrap justify-center">
                                 {currentRecipeData.map((recipe, index) => (
                                     // Recipe list layout
-                                    <div className="w-full sm:w-1/2 lg:w-1/4 p-3" key={index}>
+                                    <div className="w-1/2 md:w-1/3 lg:w-1/4 p-3" key={index}>
                                         {/* Individual recipe card */}
                                         <button onClick={(e) => handleClick(e, recipe.id)} className="w-full text-left h-full flex-grow transition-transform transform hover:scale-105">
                                             <div className="relative pb-10 bg-white shadow-lg rounded-lg h-full overflow-hidden">
@@ -169,16 +170,16 @@ function Recipes() {
                                                 <img className="w-full object-cover" src={`https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = recipePlaceholderImage;}}/>
                                                 <div className="flex flex-col mx-6 my-4 text-black space-y-2">
                                                     {/* Recipe name */}
-                                                    <h3 className="text-lg font-bold font-georgia text-black">{recipe.title}</h3>
+                                                    <h3 className="text-sm md:text-md lg:text-lg font-bold font-georgia text-black">{recipe.title}</h3>
                                                     <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">
                                                         {/* Cooking time */}
                                                         <div className="flex flex-row items-center space-x-1">
-                                                            <img src={cookingTimeIcon} className="w-8"></img>
+                                                            <img src={cookingTimeIcon} className="w-6 lg:w-8"></img>
                                                             <p>{recipe.prepTime} minutes</p>
                                                         </div>
                                                         {/* Calories */}
                                                         <div className="flex flex-row items-center space-x-1">
-                                                            <img src={caloriesIcon} className="w-8"></img>
+                                                            <img src={caloriesIcon} className="w-6 lg:w-8"></img>
                                                             <p>{recipe.calories} kcal</p>
                                                         </div>
                                                     </div>
