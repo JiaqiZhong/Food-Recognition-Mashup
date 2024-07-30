@@ -3,7 +3,6 @@ import { PrimaryButton } from '../Component/Buttons';
 import ButtonGroup from '../Component/ButtonGroup';
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
-import camera from "../Images/phone-frame.png";
 
 // "Take A Photo" page that allows the user to turn on the camera and take a photo of food
 function Snap() {
@@ -102,7 +101,7 @@ function Snap() {
                     {/* Display the webcam and a fake phone frame in a fixed position */}
                     <div>
                         <Webcam ref={webcamRef} mirrored={!isPhoneOrTablet()} videoConstraints={videoConstraints} className="absolute left-72 top-28 h-60 w-96 object-cover"/>
-                        <img src={camera} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
+                        <img src={`${process.env.PUBLIC_URL}/Images/phone-frame.png`} className="absolute w-camera left-14 top-24" alt="phone frame"></img>
                     </div>                
                     <div className="absolute top-96 left-96 right-96">
                         {isStateOne ? ( 

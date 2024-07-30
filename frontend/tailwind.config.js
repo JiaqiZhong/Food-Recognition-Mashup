@@ -15,12 +15,12 @@ module.exports = {
         serif: ['"serif"']
       },
       backgroundImage: {
-        'original': "url('/src/Images/wooden-tray.jpg')",
-        'wooden-tray-only': "url('/src/Images/wooden-tray-only.jpg')",
-        'ingredient-label': "url('/src/Images/sticker.png')",
-        'recipe-book': "url('/src/Images/recipe-book.png')",
-        'paper': "url('/src/Images/paper.png')",
-        'ingredient-label-with-closing-button': "url('/src/Images/sticker-with-closing-button.png')",
+        'original': "url('/src/BackgroundImages/wooden-tray.jpg')",
+        'wooden-tray-only': "url('/src/BackgroundImages/wooden-tray-only.jpg')",
+        'ingredient-label': "url('/src/BackgroundImages/sticker.png')",
+        'recipe-book': "url('/src/BackgroundImages/recipe-book.png')",
+        'paper': "url('/src/BackgroundImages/paper.png')",
+        'ingredient-label-with-closing-button': "url('/src/BackgroundImages/sticker-with-closing-button.png')",
       },
       backgroundSize: {
         '100': '100% 100%',

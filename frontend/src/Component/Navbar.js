@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import appLogo from '../Icons/app-logo.png';
-import profileIcon from '../Icons/profile-icon.png';
-import menuIcon from '../Icons/menu-icon.png'
 
 function Navbar() {
   // Set initial state of menu to be closed
@@ -18,13 +15,13 @@ function Navbar() {
           <div className="flex flex-row w-full sm:w-auto justify-between">
             {/* Show menu button only on small screen */}
             <button className="sm:hidden" onClick={toggleMenu}>
-              <img className="w-8" src={menuIcon} alt="menu"></img>
+              <img className="w-8" src={`${process.env.PUBLIC_URL}/Icons/menu-icon.png`} alt="menu"></img>
             </button>
             {/* App logo */}
-            <img src={appLogo} className="w-14 h-full sm:mr-8" alt="logo"></img>    
+            <img src={`${process.env.PUBLIC_URL}/Icons/app-logo.png`} className="w-14 h-full sm:mr-8" alt="logo"></img>    
             {/* Profile icon */}
             <a href="/" className="w-8 sm:hidden">
-              <img src={profileIcon} alt="profile"></img>
+              <img src={`${process.env.PUBLIC_URL}/Icons/profile-icon.png`} alt="profile"></img>
             </a>
           </div>
           <div id="menu" className={`flex w-full flex-col sm:block sm:flex-row sm:space-x-8 m-4 ${isMenuVisible ? 'block' : 'hidden'}`}>
@@ -35,7 +32,7 @@ function Navbar() {
           </div>
         </div>
         <a href="/" className="w-8 hidden sm:block">
-          <img src={profileIcon} alt="profile"></img>
+          <img src={`${process.env.PUBLIC_URL}/Icons/profile-icon.png`} alt="profile"></img>
         </a>
     </nav>
   );

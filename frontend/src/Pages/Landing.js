@@ -1,5 +1,4 @@
 import React from 'react';
-import cameraFrame from '../Images/camera-frame.png'
 import UploadOrSnap from '../Component/UploadOrSnap';
 
 // Basic welcome page that allows users to choose whether they want to upload a photo or take a photo of food
@@ -11,7 +10,7 @@ function Landing() {
           <h1 className="font-snell text-6xl">FoodLens</h1>
           <h2 className="font-georgia text-2xl font-bold">Snap it, know it, cook it.</h2>
           {/* Camera frame */}
-          <img className="max-w-md w-full" src={cameraFrame} alt="camera frame"></img>
+          <img className="max-w-md w-full" src={`${process.env.PUBLIC_URL}/Images/camera-frame.png`} alt="camera frame"></img>
           <p className="font-serif text-xl">Wanna know the nutrients of your daily intake or find recipes of your favourite ingredients?</p>
           {/* Buttons for uploading an image and taking a photo */}
           <UploadOrSnap />

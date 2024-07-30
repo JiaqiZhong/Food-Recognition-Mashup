@@ -1,9 +1,5 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import cookingTimeIcon from '../Icons/cooking-time-icon.png';
-import caloriesIcon from '../Icons/calories-icon.png';
-import servingSizeIcon from '../Icons/serving-size-icon.png';
-import recipePlaceholderImage from '../Images/recipe-placeholder-image.png';
 
 // Individual recipe page that shows the details of the recipe
 function Recipe() {
@@ -36,24 +32,24 @@ function Recipe() {
                                 <div className="font-serif text-sm sm:text-lg flex flex-row sm:flex-col lg:flex-row sm:space-y-4 space-y-0 lg:space-y-0 justify-between">
                                     {/* Cooking time */}
                                     <div className="flex flex-row items-center space-x-1">
-                                        <img src={cookingTimeIcon} className="w-6 sm:w-8" alt="Cooking Time"></img>
+                                        <img src={`${process.env.PUBLIC_URL}/Icons/cooking-time-icon.png`} className="w-6 sm:w-8" alt="Cooking Time"></img>
                                         <p>{recipeDetails.prepTime} minutes</p>
                                     </div>
                                     {/* Servings */}
                                     <div className="flex flex-row items-center space-x-1">
-                                        <img src={servingSizeIcon} className="w-6 sm:w-8" alt="Serving Size"></img>
+                                        <img src={`${process.env.PUBLIC_URL}/Icons/serving-size-icon.png`} className="w-6 sm:w-8" alt="Serving Size"></img>
                                         <p>{recipeDetails.servings} servings</p>
                                     </div>
                                     {/* Calories */}
                                     <div className="flex flex-row items-center space-x-1">
-                                        <img src={caloriesIcon} className="w-6 sm:w-8" alt="Calories"></img>
+                                        <img src={`${process.env.PUBLIC_URL}/Icons/calories-icon.png`} className="w-6 sm:w-8" alt="Calories"></img>
                                         <p>{recipeDetails.calories} kcal</p>
                                     </div>
                                 </div>
                             </div>
                             {/* Recipe image */}
                             <div className="flex items-center justify-center">
-                                <img className="max-w-md w-full" src={`https://img.spoonacular.com/recipes/${recipeDetails.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = recipePlaceholderImage;}}></img>
+                                <img className="max-w-md w-full" src={`https://img.spoonacular.com/recipes/${recipeDetails.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = `${process.env.PUBLIC_URL}/Images/recipe-placeholder-image.png`}}></img>
                             </div>
                         </div>
                     </div>

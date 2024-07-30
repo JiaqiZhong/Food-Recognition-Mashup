@@ -1,8 +1,6 @@
 import React from 'react';
 import { usePagination, DOTS } from './usePagination';
 import classnames from 'classnames';
-import leftArrowIcon from '../Icons/left-arrow-icon.png';
-import rightArrowIcon from '../Icons/right-arrow-icon.png';
 
 // Pagination logic and UI for recipe list page
 const Pagination = props => {
@@ -44,7 +42,7 @@ const Pagination = props => {
         })}
         onClick={onPrevious}
       >
-        <img className="w-2" src={leftArrowIcon} alt="left arrow"></img>
+        <img className="w-2" src={`${process.env.PUBLIC_URL}/Icons/left-arrow-icon.png`} alt="left arrow"></img>
       </li>
       {paginationRange.map(pageNumber => {
         if (pageNumber === DOTS) {
@@ -71,7 +69,7 @@ const Pagination = props => {
         })}
         onClick={onNext}
       >
-        <img className="w-2" src={rightArrowIcon} alt="right arrow"></img>
+        <img className="w-2" src={`${process.env.PUBLIC_URL}/Icons/right-arrow-icon.png`} alt="right arrow"></img>
       </li>
     </ul>
   );
