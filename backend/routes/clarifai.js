@@ -15,7 +15,7 @@ metadata.set("authorization", `Key ${process.env.CLARIFAI_KEY}`);
 
 const upload = multer({
     storage: multer.memoryStorage({}),
-    limits: { fileSize: 2000000 },
+    limits: { fileSize: 10 * 1024 * 1024 },
     fileFilter (_req, file, callback) {
         const filetypes = /jpeg|jpg|png/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
