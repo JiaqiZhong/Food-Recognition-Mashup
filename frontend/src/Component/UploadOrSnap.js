@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PrimaryButton } from './Buttons';
 import ButtonGroup from './ButtonGroup';
+import imageCompression from 'browser-image-compression';
 
 // Buttons for uploading an image or taking a photo
 function UploadOrSnap() { 
