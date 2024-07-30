@@ -24,10 +24,10 @@ function UploadOrSnap() {
 
         // Compress the image
         const compressedFile = await imageCompression(inputImage, options);
+        const base64 = await imageCompression.getDataUrlFromFile(compressedFile);
 
         const reader = new FileReader();
         reader.onloadend = () => {
-          const base64 = reader.result;
           // Navigate to the preview page with compressed image data
           navigate('/Preview', { state: { image: compressedFile, base64: base64 } });
           localStorage.setItem('newImage', base64);
