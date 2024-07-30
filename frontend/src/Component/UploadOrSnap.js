@@ -10,33 +10,20 @@ function UploadOrSnap() {
   const fileInputRef = useRef(null);
 
   // Button listener for "Upload An Image"
-  const handleUploadAnImage = async (e) => {
+  const handleUploadAnImage = (e) => {
     const inputImage = e.target.files[0];
-
+    console.log(inputImage);
     if (inputImage) {
-      try {
-        // Compression options
-        const options = {
-          maxSizeMB: 2,
-          useWebWorker: true
-        };
-
-        // Compress the image
-        const compressedFile = await imageCompression(inputImage, options);
-        const base64 = await imageCompression.getDataUrlFromFile(compressedFile);
-
         const reader = new FileReader();
         reader.onloadend = () => {
-          // Navigate to the preview page with compressed image data
-          navigate('/Preview', { state: { image: compressedFile, base64: base64 } });
-          localStorage.setItem('newImage', base64);
-        };
-        reader.readAsDataURL(compressedFile);
-      } catch (error) {
-        console.error('Error compressing or storing image:', error);
-      }
+            const base64 = reader.result;
+            // Pass the image data to the preview page
+            navigate(`/Preview`, { state: { image: inputImage, base64: base64 } });
+            localStorage.setItem('newImage', base64);
+        }
+        reader.readAsDataURL(inputImage);
     }
-  };
+  }
 
   // Button Listener for "Take A Photo"
   const handleTakeAPhoto = (e) => {
