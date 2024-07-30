@@ -75,7 +75,11 @@ function Recognition() {
     // Get predicted results with uploaded image as input
     const formData = new FormData();
     formData.append("food_image", image);
-    axios.post(url, formData)
+    axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     .then((res) => {
         let results = res.data.results;
         const promises = results.map(async (result) => {
