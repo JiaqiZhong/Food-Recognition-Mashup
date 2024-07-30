@@ -54,7 +54,7 @@ function Recipe() {
                         </div>
                     </div>
                     {/* Right page */}
-                    <div className="flex-1 flex flex-col space-y-6 text-sm sm:text-md md:text-lg p-6 pr-10 lg:pt-6 lg:pr-10 ">
+                    <div className="flex-1 flex flex-col space-y-6 text-sm sm:text-base md:text-lg p-6 pr-10 lg:pt-6 lg:pr-10 ">
                         {/* Ingredients */}
                         <div className="relative text-black bg-white bg-opacity-25 p-4 rounded">
                             <h5 className="absolute top-0 left-20 transform -translate-x-1/2 -translate-y-1/2 font-georgia font-bold italic text-lg">Ingredients</h5>
