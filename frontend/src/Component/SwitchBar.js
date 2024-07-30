@@ -40,7 +40,7 @@ function SwitchBar(props) {
                 <p className="font-serif text-xl">Which one did I guess right? Select them to find your favourite recipes!</p>
                 {/* Manually add ingredients */}
                 <div className="flex flex-row space-x-2">
-                    <input className="bg-transparent rounded h-8 border border-white font-serif text-lg p-1" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more here, one at a time" onChange={handleTextAreaChange}></input>
+                    <input className="bg-transparent w-56 rounded h-8 border border-white font-serif text-lg p-1" id="textarea" value={manuallyEnteredIngredients} placeholder="Add more here, one at a time" onChange={handleTextAreaChange}></input>
                     <button className="bg-white text-gray-800 font-georgia font-bold px-2 h-8 rounded shadow-custom transition-transform transform hover:scale-105" onClick={handleAddIngredient}>Add</button>
                 </div>
                 {/* Display each manually added ingredient on a sticky note*/}

@@ -17,11 +17,11 @@ function Recipe() {
                     {/* Left page */}
                     <div className="flex-1 flex flex-col items-center lg:items-start space-y-4 mx-10 sm:mx-16 mt-10 lg:mx-4 lg:mt-4 my-4">
                         {/* Recipe title */}
-                        <h1 className="font-georgia font-bold text-lg sm:text-xl">{recipeDetails.title}</h1>
+                        <h1 className="font-georgia font-bold text-lg sm:text-xl pl-4">{recipeDetails.title}</h1>
                         <div className="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-4 lg:flex-col lg:space-y-6">
                             <div className="flex flex-col space-y-4">
                                 {/* Diet label */}
-                                <div className="flex flex-wrap text-center items-center">
+                                <div className="flex flex-wrap text-center items-center pl-2">
                                     {recipeDetails.diets.map((diet, index) => {
                                         return (
                                             <label className="bg-white bg-opacity-75 text-gray-800 rounded font-serif font-bold px-2 py-1 m-1" key={index}>{diet}</label>
@@ -29,7 +29,7 @@ function Recipe() {
                                     })}
                                 </div>
                                 {/* Cooking information */}
-                                <div className="font-serif text-sm sm:text-lg flex flex-row sm:flex-col lg:flex-row sm:space-y-4 space-y-0 lg:space-y-0 justify-between">
+                                <div className="font-serif text-sm sm:text-base flex flex-row sm:flex-col lg:flex-row lg:text-lg sm:space-y-4 space-y-0 lg:space-y-0 justify-between pl-2">
                                     {/* Cooking time */}
                                     <div className="flex flex-row items-center space-x-1">
                                         <img src={`${process.env.PUBLIC_URL}/Icons/cooking-time-icon.png`} className="w-6 sm:w-8" alt="Cooking Time"></img>
@@ -49,12 +49,12 @@ function Recipe() {
                             </div>
                             {/* Recipe image */}
                             <div className="flex items-center justify-center">
-                                <img className="max-w-md w-full" src={`https://img.spoonacular.com/recipes/${recipeDetails.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = `${process.env.PUBLIC_URL}/Images/recipe-placeholder-image.png`}}></img>
+                                <img className="max-w-md w-full pl-4 lg:px-0" src={`https://img.spoonacular.com/recipes/${recipeDetails.id}-636x393.jpg`} alt="recipe" onError={(e) => {e.target.onerror = null; e.target.src = `${process.env.PUBLIC_URL}/Images/recipe-placeholder-image.png`}}></img>
                             </div>
                         </div>
                     </div>
                     {/* Right page */}
-                    <div className="flex-1 flex flex-col space-y-6 text-sm sm:text-md md:text-lg p-6 pr-8 lg:pt-2 lg:pr-10 ">
+                    <div className="flex-1 flex flex-col space-y-6 text-sm sm:text-md md:text-lg p-6 pr-10 lg:pt-6 lg:pr-10 ">
                         {/* Ingredients */}
                         <div className="relative text-black bg-white bg-opacity-25 p-4 rounded">
                             <h5 className="absolute top-0 left-20 transform -translate-x-1/2 -translate-y-1/2 font-georgia font-bold italic text-lg">Ingredients</h5>

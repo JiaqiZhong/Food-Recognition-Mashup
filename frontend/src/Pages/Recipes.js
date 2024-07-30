@@ -168,7 +168,7 @@ function Recipes() {
                                                 <div className="flex flex-col mx-4 sm:mx-6 my-4 text-black space-y-2">
                                                     {/* Recipe name */}
                                                     <h3 className="text-sm md:text-md lg:text-lg font-bold font-georgia text-black">{recipe.title}</h3>
-                                                    <div className="font-serif absolute pb-3 bottom-0 left-0 right-0 mx-6 flex flex-row items-center justify-between">
+                                                    <div className="font-serif absolute pb-3 mx-3 bottom-0 left-0 right-0 flex flex-row items-center justify-between">
                                                         {/* Cooking time */}
                                                         <div className="flex flex-row items-center space-x-1">
                                                             <img src={`${process.env.PUBLIC_URL}/Icons/cooking-time-icon.png`} className="w-6 lg:w-8" alt="Cooking Time"></img>
