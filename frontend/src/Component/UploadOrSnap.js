@@ -12,7 +12,6 @@ function UploadOrSnap() {
   // Button listener for "Upload An Image"
   const handleUploadAnImage = async (e) => {
     const inputImage = e.target.files[0];
-    console.log(inputImage);
 
     if (inputImage) {
       try {
